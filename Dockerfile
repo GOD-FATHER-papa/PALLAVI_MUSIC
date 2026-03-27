@@ -1,16 +1,14 @@
-FROM nikolaik/python-nodejs:python3.10-nodejs20
+FROM python:3.13-slim
 
-RUN apt-get update && \
-    apt-get install -y curl gnupg ffmpeg git && \
-    curl -fsSL https://deb.nodesource.com/setup_19.x | bash - && \
-    apt-get install -y nodejs && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git ffmpeg curl && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
 
 COPY . /app/
-WORKDIR /app/
 
-RUN python3 -m pip install --upgrade pip
-RUN pip3 install --no-cache-dir -U -r requirements.txt \
-    && python3 -m pip install -U --pre "yt-dlp[default]"
+RUN pip install --no-cache-dir -U pip && \
+    pip install --no-cache-dir -r requirements.txt
 
 CMD ["bash", "start"]
