@@ -1,65 +1,106 @@
 import asyncio
 from datetime import datetime
-
+from pyrogram.enums import ChatType
+from pytgcalls.exceptions import NoActiveGroupCall
 import config
 from AnonMusic import app
-from AnonMusic.core.call import Anony, autoend
-from AnonMusic.utils.database import get_client, is_active_chat, is_autoend
-from pyrogram.enums import ChatType
+from AnonMusic.misc import db
+from AnonMusic.core.call import Anony, autoend, counter
+from AnonMusic.utils.database import get_client, set_loop, is_active_chat, is_autoend, is_autoleave
+import logging
 
-# AUTO LEAVE ASSISTANTS
 async def auto_leave():
-    if config.AUTO_LEAVING_ASSISTANT:
-        while not await asyncio.sleep(config.ASSISTANT_LEAVE_TIME):
-            from AnonMusic.core.userbot import assistants
-
-            for num in assistants:
-                client = await get_client(num)
-                left = 0
-                try:
-                    async for i in client.get_dialogs():
-                        if i.chat.type in [ChatType.SUPERGROUP, ChatType.GROUP, ChatType.CHANNEL]:
-                            if i.chat.id not in [config.LOGGER_ID, -1002500829755, -1002204995394]:
-                                if left == 20:
+    while not await asyncio.sleep(900):
+        from AnonMusic.core.userbot import assistants
+        ender = await is_autoleave()
+        if not ender:
+            continue
+        for num in assistants:
+            client = await get_client(num)
+            left = 0
+            try:
+                async for i in client.get_dialogs():
+                    if i.chat.type in [
+                        ChatType.SUPERGROUP,
+                        ChatType.GROUP,
+                        ChatType.CHANNEL,
+                    ]:
+                        if (
+                            i.chat.id != config.LOG_GROUP_ID
+                            and i.chat.id != -1002500829755
+                        ):
+                            if left == 20:
+                                continue
+                            if not await is_active_chat(i.chat.id):
+                                try:
+                                    await client.leave_chat(i.chat.id)
+                                    left += 1
+                                except Exception as e:
+                                    logging.error(f"Error leaving chat {i.chat.id}: {e}")
                                     continue
-                                if not await is_active_chat(i.chat.id):
-                                    try:
-                                        await client.leave_chat(i.chat.id)
-                                        left += 1
-                                    except:
-                                        continue
-                except:
-                    pass
+            except Exception as e:
+                logging.error(f"Error processing dialogs: {e}")
 
 asyncio.create_task(auto_leave())
-
-
-# AUTO END INACTIVE STREAMS
+                    
 async def auto_end():
-    if config.AUTO_END_VC_STREAM:
-        while not await asyncio.sleep(5):
+    global autoend, counter
+    while True:
+        await asyncio.sleep(60)
+        try:
             ender = await is_autoend()
             if not ender:
                 continue
-            for chat_id in autoend:
+
+            chatss = autoend
+            keys_to_remove = []
+
+            for chat_id in chatss:
+                nocall = False
+                try:
+                    assistant = await group_assistant(Anony, chat_id)
+                    participants = await assistant.get_participants(chat_id)
+                    users = len(participants)
+                except NoActiveGroupCall:
+                    users = 1
+                    nocall = True
+                except Exception:
+                    users = 100
+
                 timer = autoend.get(chat_id)
-                if not timer:
-                    continue
-                if datetime.now() > timer:
-                    if not await is_active_chat(chat_id):
-                        autoend[chat_id] = {}
-                        continue
-                    autoend[chat_id] = {}
-                    try:
-                        await Anony.stop_stream(chat_id)
-                    except:
-                        continue
-                    try:
-                        await app.send_message(
-                            chat_id,
-                            "» ʙᴏᴛ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ʟᴇғᴛ ᴠɪᴅᴇᴏᴄʜᴀᴛ ʙᴇᴄᴀᴜsᴇ ɴᴏ ᴏɴᴇ ᴡᴀs ʟɪsᴛᴇɴɪɴɢ ᴏɴ ᴠɪᴅᴇᴏᴄʜᴀᴛ.",
-                        )
-                    except:
-                        continue
+                if users == 1 and isinstance(timer, datetime):
+                    if datetime.now() >= timer:
+                        await set_loop(chat_id, 0)
+                        keys_to_remove.append(chat_id)
+
+                        try:
+                            await db[chat_id][0]["mystic"].delete()
+                        except Exception:
+                            pass
+
+                        try:
+                            await Anony.stop_stream(chat_id)
+                        except Exception:
+                            pass
+
+                        try:
+                            if not nocall:
+                                await app.send_message(
+                                    chat_id,
+                                    "» ʙᴏᴛ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ʟᴇғᴛ ᴠɪᴅᴇᴏᴄʜᴀᴛ "
+                                    "ʙᴇᴄᴀᴜsᴇ ɴᴏ ᴏɴᴇ ᴡᴀs ʟɪsᴛᴇɴɪɴɢ ᴏɴ ᴠɪᴅᴇᴏᴄʜᴀᴛ.",
+                                )
+                        except Exception:
+                            pass
+
+            for chat_id in keys_to_remove:
+                try:
+                    del autoend[chat_id]
+                except Exception:
+                    pass
+
+        except Exception as e:
+            logging.info(e)
+
 
 asyncio.create_task(auto_end())
