@@ -1,14 +1,15 @@
-import re, logging
-
+import re
+import os
+import asyncio
+import yt_dlp
+import logging
 from typing import Union
 
 from pyrogram.enums import MessageEntityType
 from pyrogram.types import Message
-
 from py_yt import VideosSearch, Playlist
 
-from AnonMusic.utils.database import is_on_off
-from AnonMusic.utils.downloader import downloader
+from AnonMusic.utils.downloader import VibeApi
 from AnonMusic.utils.formatters import time_to_seconds
 
 logger = logging.getLogger(__name__)
@@ -93,13 +94,11 @@ class YouTubeAPI:
             link = self.base + link
         link = link.split("&")[0]
         
-        # Try to get direct video URL
-        downloaded_file = await downloader.download_video(link)
+        downloaded_file = await VibeApi.download_video(link)
         if downloaded_file:
             return 1, downloaded_file
         
-        # Fallback to URL extraction
-        return await downloader.get_video_url(link)
+        return await VibeApi.get_video_url(link)
 
     async def playlist(self, link, limit, user_id, videoid: Union[bool, str] = None):
         if videoid:
@@ -139,7 +138,7 @@ class YouTubeAPI:
             link = self.base + link
         link = link.split("&")[0]
         
-        cookie_file = downloader.get_cookie_file()
+        cookie_file = VibeApi.get_cookie_file()
         if not cookie_file:
             return [], link
         
@@ -197,29 +196,24 @@ class YouTubeAPI:
         if videoid:
             link = self.base + link
         
-        # Determine if we need video or audio
         is_video = bool(video or songvideo)
         is_audio = bool(songaudio or not video)
         
-        # Try API download first
         try:
             if is_video:
-                file_path = await downloader.download_video(link)
+                file_path = await VibeApi.download_video(link)
                 if file_path:
                     return file_path, True
             elif is_audio:
-                file_path = await downloader.download_song(link)
+                file_path = await VibeApi.download_song(link)
                 if file_path:
                     return file_path, True
         except Exception as e:
-            logger.error(f"API download failed: {e}")
+            logger.error(f"Download failed: {e}")
         
-        # Fallback to cookies method if API fails
-        logger.info("API failed, using cookies fallback")
-        
-        cookie_file = downloader.get_cookie_file()
+        cookie_file = VibeApi.get_cookie_file()
         if not cookie_file:
-            logger.error("No cookies found for fallback")
+            logger.error("No cookies found")
             return None, False
         
         loop = asyncio.get_running_loop()
@@ -257,9 +251,5 @@ class YouTubeAPI:
             file_path = await loop.run_in_executor(None, _ytdlp_download)
             return file_path, True
         except Exception as e:
-            logger.error(f"Fallback download failed: {e}")
+            logger.error(f"Fallback failed: {e}")
             return None, False
-
-
-# Global instance
-youtube_api = YouTubeAPI()
