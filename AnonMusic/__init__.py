@@ -1,22 +1,14 @@
-from .logging import LOGGER
-
 from AnonMusic.core.bot import Anony
-from AnonMusic.core.userbot import Userbot
-from AnonMusic.utils.downloader import Downloader
-
 from AnonMusic.core.dir import dirr
 from AnonMusic.core.git import git
+from AnonMusic.core.userbot import Userbot
+
 from AnonMusic.misc import dbb, heroku
 
-from .platforms import (
-    AppleAPI,
-    CarbonAPI,
-    SoundAPI,
-    SpotifyAPI,
-    RessoAPI,
-    TeleAPI,
-    YouTubeAPI,
-)
+from AnonMusic.utils.downloader import Downloader
+downloader = Downloader()
+
+from .logging import LOGGER
 
 dirr()
 git()
@@ -25,7 +17,8 @@ heroku()
 
 app = Anony()
 userbot = Userbot()
-downloader = Downloader()
+
+from .platforms import *
 
 Apple = AppleAPI()
 Carbon = CarbonAPI()
