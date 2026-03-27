@@ -7,8 +7,8 @@ from pyrogram.types import Message
 
 from py_yt import VideosSearch, Playlist
 
-from AnonMusic import downloader
 from AnonMusic.utils.database import is_on_off
+from AnonMusic.utils.downloader import downloader
 from AnonMusic.utils.formatters import time_to_seconds
 
 logger = logging.getLogger(__name__)
