@@ -2,11 +2,7 @@ from AnonMusic.core.bot import Anony
 from AnonMusic.core.dir import dirr
 from AnonMusic.core.git import git
 from AnonMusic.core.userbot import Userbot
-
 from AnonMusic.misc import dbb, heroku
-
-from AnonMusic.utils.downloader import Downloader
-downloader = Downloader()
 
 from .logging import LOGGER
 
