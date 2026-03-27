@@ -213,7 +213,3 @@ class Downloader:
         except Exception as e:
             logger.error(f"Failed to parse file size: {e}")
             return None
-
-
-# Global instance
-downloader = Downloader()
