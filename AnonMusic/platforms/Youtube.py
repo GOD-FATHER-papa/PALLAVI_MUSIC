@@ -54,7 +54,8 @@ class FallenApi:
         """Build API URL exactly like original code"""
         endpoint = "video" if video else "audio"
         # Original format: {BASE_API_URL}/song/{video_id}?api={BASE_API_KEY}
-        return f"{self.api_url}/{endpoint}/{video_id}?api={self.api_key}"
+        return f"{self.api_url}/{endpoint}?url={video_id}&api_key={self.api_key}"
+        #https://api.vibebots.fun/audio?url=o-mms3-v2A4&api_key=VibeBots_RsszUDPo1HjFWIsPqih
 
     async def download_track(
         self,
