@@ -56,6 +56,8 @@ SPOTIFY_CLIENT_SECRET = getenv("SPOTIFY_CLIENT_SECRET", "c9c63c6fbf2f467c8bc6862
 
 PLAYLIST_FETCH_LIMIT = validate_env_var("PLAYLIST_FETCH_LIMIT", cast_type=int, default=25)
 
+AUTH_LIMIT = validate_env_var("AUTH_LIMIT", cast_type=int, default=15)
+
 TG_AUDIO_FILESIZE_LIMIT = validate_env_var("TG_AUDIO_FILESIZE_LIMIT", cast_type=int, default=204857600)
 TG_VIDEO_FILESIZE_LIMIT = validate_env_var("TG_VIDEO_FILESIZE_LIMIT", cast_type=int, default=2071824)
 
