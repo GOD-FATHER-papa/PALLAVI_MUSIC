@@ -1,6 +1,5 @@
 from pyrogram import filters
 from pyrogram.types import Message
-
 from AnonMusic import app
 from AnonMusic.core.call import Anony
 from AnonMusic.misc import SUDOERS, db
@@ -9,9 +8,7 @@ from AnonMusic.utils.database import is_active_chat, is_nonadmin_chat
 from AnonMusic.utils.decorators.language import languageCB
 from AnonMusic.utils.inline import close_markup, speed_markup
 from config import BANNED_USERS, adminlist
-
 checker = []
-
 
 @app.on_message(
     filters.command(["cspeed", "speed", "cslow", "slow", "playback", "cplayback"])
@@ -29,13 +26,26 @@ async def playback(cli, message: Message, _, chat_id):
     file_path = playing[0]["file"]
     if "downloads" not in file_path:
         return await message.reply_text(_["admin_27"])
+    if len(message.command) > 1:
+        speed_input = message.text.split(None, 1)[1].strip()
+        msg = await message.reply_text(_["admin_31"])
+        try:
+            await Anony.speedup_stream(
+                chat_id,
+                file_path,
+                speed_input, 
+                playing,
+            )
+            return await msg.edit_text(
+                _["admin_34"].format(speed_input, message.from_user.mention)
+            )
+        except:
+            return await msg.edit_text("❌ Error: Invalid Speed Input")
     upl = speed_markup(_, chat_id)
     return await message.reply_text(
         text=_["admin_28"].format(app.mention),
         reply_markup=upl,
     )
-
-
 @app.on_callback_query(filters.regex("SpeedUP") & ~BANNED_USERS)
 @languageCB
 async def del_back_playlist(client, CallbackQuery, _):
