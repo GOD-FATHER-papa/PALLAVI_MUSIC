@@ -2,9 +2,11 @@ import asyncio
 import os
 import random
 import re
+import json
 import time
 from pathlib import Path
 from typing import Optional, Union, Tuple
+from urllib.parse import quote
 
 import aiohttp
 import yt_dlp
@@ -19,7 +21,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-# Import the new API system
+
 class FallenApi:
     def __init__(self, retries: int = 3, timeout: int = 600):
         self.api_url = BASE_API_URL.rstrip("/")
@@ -48,10 +50,11 @@ class FallenApi:
         match = pattern.search(link)
         return match.group(1) if match else link
 
-    def _build_download_url(self, url: str, video: bool = False) -> str:
-        endpoint = "video" if video else "song"
-        encoded_url = quote(url, safe='')
-        return f"{self.api_url}/{endpoint}/{self._extract_youtube_id(url)}?api={self.api_key}"
+    def _build_download_url(self, video_id: str, video: bool = False) -> str:
+        """Build API URL exactly like original code"""
+        endpoint = "video" if video else "audio"
+        # Original format: {BASE_API_URL}/song/{video_id}?api={BASE_API_KEY}
+        return f"{self.api_url}/{endpoint}/{video_id}?api={self.api_key}"
 
     async def download_track(
         self,
@@ -62,35 +65,53 @@ class FallenApi:
     ) -> str | None:
 
         async with self.download_semaphore:
-            download_url = self._build_download_url(url, video)
+            download_url = self._build_download_url(video_id, video)
+            
+            logger.info(f"[{video_id}] Attempting API download from: {download_url}")
 
             for attempt in range(1, self.retries + 1):
                 try:
                     session = await self.get_session()
 
                     async with session.get(download_url) as response:
+                        logger.info(f"[{video_id}] API Response Status: {response.status}")
+                        
                         if response.status != 200:
+                            logger.warning(f"[{video_id}] API returned {response.status}, attempt {attempt}/{self.retries}")
                             if attempt < self.retries:
                                 await asyncio.sleep(2 * attempt)
                                 continue
                             return None
 
                         # Parse the API response
-                        data = await response.json()
+                        try:
+                            data = await response.json()
+                            logger.info(f"[{video_id}] API Response: {data}")
+                        except Exception as e:
+                            logger.error(f"[{video_id}] Failed to parse JSON: {e}")
+                            return None
+                        
                         status = data.get("status", "").lower()
+                        logger.info(f"[{video_id}] API Status: {status}")
                         
                         if status == "done":
                             download_link = data.get("link")
                             if not download_link:
+                                logger.error(f"[{video_id}] No download link in response")
                                 return None
                                 
+                            logger.info(f"[{video_id}] Downloading from: {download_link}")
+                            
                             # Download the actual file
                             async with session.get(download_link) as file_response:
                                 if file_response.status != 200:
+                                    logger.error(f"[{video_id}] File download failed: {file_response.status}")
                                     return None
                                     
                                 filename = self._get_filename_from_response(file_response, video_id, video)
                                 save_path = self.download_dir / filename
+                                
+                                logger.info(f"[{video_id}] Saving to: {save_path}")
                                 
                                 downloaded = await self._stream_download(
                                     file_response,
@@ -101,19 +122,35 @@ class FallenApi:
                                 )
                                 
                                 if downloaded > 0:
+                                    logger.info(f"[{video_id}] Download completed: {downloaded} bytes")
                                     return str(save_path)
+                                else:
+                                    logger.error(f"[{video_id}] Downloaded 0 bytes")
+                                    return None
+                                    
                         elif status == "downloading":
+                            logger.info(f"[{video_id}] Still processing, waiting...")
                             await asyncio.sleep(4)
                             continue
                         else:
+                            error_msg = data.get("error") or data.get("message") or f"Unexpected status '{status}'"
+                            logger.warning(f"[{video_id}] API error: {error_msg}, attempt {attempt}/{self.retries}")
                             if attempt < self.retries:
                                 await asyncio.sleep(2 * attempt)
                                 continue
                             return None
 
+                except asyncio.TimeoutError:
+                    logger.error(f"[{video_id}] Timeout on attempt {attempt}/{self.retries}")
+                    if attempt < self.retries:
+                        await asyncio.sleep(2 * attempt)
+                        continue
+                    return None
+                    
                 except Exception as e:
+                    logger.error(f"[{video_id}] Download failed on attempt {attempt}/{self.retries}: {e}")
                     if attempt == self.retries:
-                        logger.error(f"[{video_id}] Download failed: {e}")
+                        return None
 
                 if attempt < self.retries:
                     await asyncio.sleep(2 * attempt)
@@ -132,6 +169,20 @@ class FallenApi:
         downloaded = 0
 
         try:
+            # Import aiofiles only if needed
+            try:
+                import aiofiles
+            except ImportError:
+                # Fallback to normal file writing
+                with open(save_path, "wb") as f:
+                    async for chunk in response.content.iter_chunked(1024 * 1024):
+                        if chunk:
+                            f.write(chunk)
+                            downloaded += len(chunk)
+                            if progress_callback:
+                                await progress_callback(downloaded, total_size)
+                return downloaded
+                
             async with aiofiles.open(save_path, "wb") as f:
                 async for chunk in response.content.iter_chunked(1024 * 1024):
                     if chunk:
@@ -158,6 +209,7 @@ class FallenApi:
                 if filename:
                     return filename
 
+        # Default extension
         ext = "mp4" if video else "mp3"
         return f"{video_id}.{ext}"
 
@@ -175,7 +227,10 @@ class YouTubeAPI:
         self.download_dir = Path("downloads")
         self.download_dir.mkdir(exist_ok=True)
         self.file_cache = {}
-        self.cache_ttl = 300
+        
+        # Log API config
+        logger.info(f"API URL: {BASE_API_URL}")
+        logger.info(f"API Key: {BASE_API_KEY[:10]}..." if BASE_API_KEY else "API Key not set")
 
     async def exists(self, link: str, videoid: Union[bool, str] = None):
         if videoid:
@@ -268,15 +323,21 @@ class YouTubeAPI:
         # Try new API first
         video_id = link.split('v=')[-1].split('&')[0]
         try:
+            logger.info(f"Attempting video download via API for: {video_id}")
             downloaded_file = await self.fallen.download_track(video_id, link, video=True)
             if downloaded_file:
+                logger.info(f"Video downloaded via API: {downloaded_file}")
                 return 1, downloaded_file
+            else:
+                logger.warning(f"API returned no file for video: {video_id}")
         except Exception as e:
             logger.error(f"Video API failed: {e}")
         
         # Fallback to cookies method
+        logger.info(f"Falling back to cookies for video: {video_id}")
         cookie_file = self.get_cookie_file()
         if not cookie_file:
+            logger.error("No cookies found for video fallback")
             return 0, "No cookies found. Cannot download video."
             
         proc = await asyncio.create_subprocess_exec(
@@ -411,22 +472,37 @@ class YouTubeAPI:
         
         video_id = link.split('v=')[-1].split('&')[0]
         
-        # Try new API first for all downloads
+        # ALWAYS try API first
+        logger.info(f"Download requested: video_id={video_id}, video={video}, songaudio={songaudio}, songvideo={songvideo}")
+        
         try:
-            if songvideo or songaudio:
+            if songvideo or songaudio or not video:
                 # Audio download
+                logger.info(f"Attempting audio download via API for: {video_id}")
                 downloaded_file = await self.fallen.download_track(video_id, link, video=False)
                 if downloaded_file:
+                    logger.info(f"Audio downloaded via API: {downloaded_file}")
                     return downloaded_file, True
+                else:
+                    logger.warning(f"API returned no file for audio: {video_id}")
             elif video:
                 # Video download
+                logger.info(f"Attempting video download via API for: {video_id}")
                 downloaded_file = await self.fallen.download_track(video_id, link, video=True)
                 if downloaded_file:
+                    logger.info(f"Video downloaded via API: {downloaded_file}")
                     return downloaded_file, True
+                else:
+                    logger.warning(f"API returned no file for video: {video_id}")
         except Exception as e:
-            logger.error(f"API download failed: {e}")
+            logger.error(f"API download failed: {e}", exc_info=True)
         
-        # Fallback to yt-dlp with cookies
+        # If API fails, try cookies method
+        logger.info(f"API failed, falling back to cookies method for: {video_id}")
+        return await self._download_fallback(link, video, songaudio, songvideo, format_id, title)
+
+    async def _download_fallback(self, link, video, songaudio, songvideo, format_id, title):
+        """Fallback to yt-dlp with cookies"""
         cookie_file = self.get_cookie_file()
         if not cookie_file:
             logger.error("No cookies found for fallback download")
