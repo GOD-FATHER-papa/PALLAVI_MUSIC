@@ -3,25 +3,30 @@
 </p>
 
 <h1 align="center">🎧 ᴀɴᴏɴ ᴍᴜsɪᴄ × ʏᴛ ᴀᴘɪ 🔑</h1>
+<h3 align="center">✨ ᴠᴇʀsɪᴏɴ 2.0.0 ✨</h3>
 
 <p align="center">
   <b>Stream HD music in your Telegram groups — now powered by a public API!</b><br>
-  <i>Get free access to high-performance API keys instantly.</i>
+  <i>Built with latest tgcalls, ntgcalls, Pyrogram & more</i>
 </p>
 
 <p align="center">
-  <a href="https://t.me/KeyMakerRoBot"><img src="https://img.shields.io/badge/Get%20Free%20API%20Key-@KeyMakerRoBot-blue?style=for-the-badge&logo=telegram"></a>
   <a href="https://github.com/Vibe-Bots/AnonMusic"><img src="https://img.shields.io/badge/Music%20Bot%20Source-GitHub-green?style=for-the-badge&logo=github"></a>
 </p>
 
 ---
-<h1 align="center">🚀 Why This Bot? </h1>
 
-> ᴀ ɴᴏ-ᴄᴏᴏᴋɪᴇs, ɴᴏ-ᴇʀʀᴏʀ ᴍᴜsɪᴄ ʙᴏᴛ ғᴏʀ ᴛᴇʟᴇɢʀᴀᴍ ɢʀᴏᴜᴘs  
-> ʙᴜɪʟᴛ ғᴏʀ **24/7 sᴛʀᴇᴀᴍɪɴɢ**, **ʜᴅ ᴀᴜᴅɪᴏ/ᴠɪᴅᴇᴏ**, ᴀɴᴅ **sᴍᴏᴏᴛʜ ᴘᴇʀғᴏʀᴍᴀɴᴄᴇ**
+## 🚀 ᴡʜᴀᴛ's ɴᴇᴡ ɪɴ ᴠ2.0.0
+
+- 🔥 **Updated Tech Stack** – Latest `tgcalls`, `ntgcalls`, `Pyrogram`
+- 🎵 **Improved Streaming** – Smoother audio/video playback
+- 🔑 **Pre-configured API** – No need to get keys from website or bot
+- ⚡ **Faster Performance** – Optimized for 24/7 uptime
+- 🛠️ **Better Error Handling** – Cookie-free, error-free streaming
 
 ---
-<h1 align="center">🎧 YouTube API & Key Features 🔑</h1>
+
+## 🎧 YouTube API & Key Features 🔑
 
 - 🎵 ᴀᴜᴅɪᴏ & ᴠɪᴅᴇᴏ ᴘʟᴀʏʙᴀᴄᴋ  
 - 🎬 ʏᴏᴜᴛᴜʙᴇ, ᴛᴇʟᴇɢʀᴀᴍ, ʟᴏᴄᴀʟ ғɪʟᴇ sᴜᴘᴘᴏʀᴛ  
@@ -31,20 +36,16 @@
 - ⚙️ ʜɪɢʜʟʏ ᴄᴏɴғɪɢᴜʀᴀʙʟᴇ  
 - ❤️ ᴇᴀsʏ ᴛᴏ ᴜsᴇ, ᴅᴇᴘʟᴏʏ & ᴍᴀɪɴᴛᴀɪɴ 
 
----  
-
-<h1 align="center">🔐 Instant Free & Premium API Access.</h1>
-
-<p align="center">
-  <i>Get free access to high-performance API keys instantly.</i>
-</p>
-
-<p align="center">
-  <a href="https://t.me/KeyMakerRoBot"><img src="https://img.shields.io/badge/Get%20Free%20API%20Key-@KeyMakerRoBot-blue?style=for-the-badge&logo=telegram"></a>
-  <a href="https://t.me/ScyxD"><img src="https://img.shields.io/badge/PM%20For%20Paid%20API%20Key-@ScyxD-blue?style=for-the-badge&logo=telegram"></a>
-</p>
-
 ---
+
+## 🔑 API Configuration
+
+| Variable | Value |
+|----------|-------|
+| **BASE_API_URL** | `https://api.vibebots.fun` |
+| **BASE_API_KEY** | `VIBEBOTSXXXXX` |
+
+> ⚠️ **Note:** API key is pre-configured. No need to request from bot or website!
 
 ---
 
@@ -72,23 +73,15 @@ git clone https://github.com/Vibe-Bots/AnonMusic && cd AnonMusic
 ```
 
 ```
-sudo apt update && sudo apt upgrade -y
+sudo apt-get update && sudo apt-get upgrade -y
 ```
 
 ```
-sudo apt install python3-pip ffmpeg nodejs npm tmux -y
+sudo apt-get install python3-pip ffmpeg -y
 ```
 
 ```
 sudo pip3 install -U pip
-```
-
-```
-npm i -g npm
-```
-
-```
-sudo apt install python3-venv -y
 ```
 
 ```
@@ -106,18 +99,10 @@ pip3 install -U -r requirements.txt
 ```
 nano .env
 ```
----
-
-<b>📄 ɢᴇᴛ ʏᴏᴜʀ ɴᴇᴄᴇssᴀʀʏ ᴇɴᴠɪʀᴏɴᴍᴇɴᴛ ᴠᴀʀɪᴀʙʟᴇs : [sample.env](https://github.com/Vibe-Bots/AnonMusic/blob/master/sample.env)
 
 ---
 
-<p align="center">
-  <b>🔐 ɢᴇᴛ ʏᴏᴜʀ ʏᴏᴜᴛᴜʙᴇ ᴀᴘɪ ᴛʀɪᴀʟ ᴋᴇʏ</b><br>
-  <a href="https://t.me/KeyMakerRoBot">
-    <img src="https://img.shields.io/badge/Get%20Free%20API%20Key-@KeyMakerRoBot-blue?style=for-the-badge&logo=telegram" alt="Get API Key on Telegram">
-  </a>
-</p>
+<b>📄 ɢᴇᴛ ʏᴏᴜʀ ɴᴇᴄᴇssᴀʀʏ ᴇɴᴠɪʀᴏɴᴍᴇɴᴛ ᴠᴀʀɪᴀʙʟᴇs : [sample.env](https://github.com/Vibe-Bots/AnonMusic/blob/Master/sample.env)
 
 ---
 
@@ -139,50 +124,45 @@ bash start
 
 ---
 
-## ⚙️ ᴇɴᴠɪʀᴏɴᴍᴇɴᴛ ᴠᴀʀɪᴀʙʟᴇs (.ᴇɴᴠ)
+<h1 align="center">⚙️ ᴇɴᴠɪʀᴏɴᴍᴇɴᴛ ᴠᴀʀɪᴀʙʟᴇs (.ᴇɴᴠ)</h1>
 
-| ᴠᴀʀɪᴀʙʟᴇ          | ᴅᴇsᴄʀɪᴘᴛɪᴏɴ                                                   |
+| Variable          | Description                                                   |
 |-------------------|----------------------------------------------------------------|
-| ᴀᴘɪ_ʜᴀsʜ           | ᴛᴇʟᴇɢʀᴀᴍ ᴀᴘɪ ʜᴀsʜ                                           |
-| ᴀᴘɪ_ɪᴅ             | ᴛᴇʟᴇɢʀᴀᴍ ᴀᴘɪ ɪᴅ                                             |
-| ʙᴏᴛ_ᴛᴏᴋᴇɴ         | ᴛᴇʟᴇɢʀᴀᴍ ʙᴏᴛ ᴛᴏᴋᴇɴ                                         |
-| ᴅᴜʀᴀᴛɪᴏɴ_ʟɪᴍɪᴛ    | ᴍᴀx ᴘʟᴀʏ ᴅᴜʀᴀᴛɪᴏɴ ɪɴ ᴍɪɴᴜᴛᴇs (ᴅᴇғᴀᴜʟᴛ: 180)               |
-| ʟᴏɢɢᴇʀ_ɪᴅ          | ʟᴏɢ ɢʀᴏᴜᴘ ɪᴅ                                               |
-| ᴍᴏɴɢᴏ_ᴜʀʟ          | ᴍᴏɴɢᴏᴅʙ ᴜʀɪ                                               |
-| ᴏᴡɴᴇʀ_ɪᴅ           | ʙᴏᴛ ᴏᴡɴᴇʀ ᴛᴇʟᴇɢʀᴀᴍ ɪᴅ                                     |
-| sᴇssɪᴏɴ_sᴛʀɪɴɢ     | ᴘʏʀᴏɢʀᴀᴍ sᴛʀɪɴɢ sᴇssɪᴏɴ                                   |
-| ʏᴏᴜᴛᴜʙᴇ ᴀᴘɪ - ʙᴀsᴇ_ᴀᴘɪ_ᴋᴇʏ | ɢᴇᴛ ғʀᴏᴍ - [@KeyMakerRoBot](https://t.me/KeyMakerRoBot)
-
+| API_HASH           | ᴛᴇʟᴇɢʀᴀᴍ ᴀᴘɪ ʜᴀsʜ                                           |
+| API_ID             | ᴛᴇʟᴇɢʀᴀᴍ ᴀᴘɪ ɪᴅ                                             |
+| BOT_TOKEN         | ᴛᴇʟᴇɢʀᴀᴍ ʙᴏᴛ ᴛᴏᴋᴇɴ                                         |
+| DURATION_LIMIT    | ᴍᴀx ᴘʟᴀʏ ᴅᴜʀᴀᴛɪᴏɴ ɪɴ ᴍɪɴᴜᴛᴇs (ᴅᴇғᴀᴜʟᴛ: 180)               |
+| LOGGER_ID          | ʟᴏɢ ɢʀᴏᴜᴘ ɪᴅ                                               |
+| MONGO_URL          | ᴍᴏɴɢᴏᴅʙ ᴜʀɪ                                               |
+| OWNER_ID           | ʙᴏᴛ ᴏᴡɴᴇʀ ᴛᴇʟᴇɢʀᴀᴍ ɪᴅ                                     |
+| SESSION_STRING     | ᴘʏʀᴏɢʀᴀᴍ sᴛʀɪɴɢ sᴇssɪᴏɴ                                   |
+| BASE_API_URL | https://api.vibebots.fun |
+| BASE_API_KEY | Already Added in Config |
 ---
 
-## ❤️ ᴍᴀɪɴᴛᴀɪɴᴇʀs & ᴄᴏɴᴛʀɪʙᴜᴛᴏʀs
+<h1 align="center">❤️ ᴍᴀɪɴᴛᴀɪɴᴇʀs & ᴄᴏɴᴛʀɪʙᴜᴛᴏʀs</h1>
 
 | ɴᴀᴍᴇ | ʀᴏʟᴇ |
 |------|------|
-| [sᴀᴄʜɪɴ sᴀɴᴀᴛᴀɴɪ](https://t.me/MyselfSachinOp) | ᴄᴏʀᴇ ᴅᴇᴠᴇʟᴏᴘᴇʀ |
+| [sᴀᴄʜɪɴ sᴀɴᴀᴛᴀɴɪ](https://t.me/TheSachinxD) | ᴄᴏʀᴇ ᴅᴇᴠᴇʟᴏᴘᴇʀ |
 | [sᴄʏxᴅ](https://t.me/ScyxD) | ʏᴏᴜᴛᴜʙᴇ ᴘʀᴏxʏ ᴍᴀɢɪᴄ |
-| [ɴᴏᴠɪᴀ](https://t.me/ScyxD) | ᴍᴀɪɴᴛᴀɪɴᴇʀ |
-| sᴀɴᴀᴛᴀɴɪ ᴛᴇᴀᴍ | ʙᴀsᴇ ɪɴsᴘɪʀᴀᴛɪᴏɴ |
 
 ---
 
-## 💬 sᴜᴘᴘᴏʀᴛ & ᴜᴘᴅᴀᴛᴇs
+<h1 align="center">💬 sᴜᴘᴘᴏʀᴛ & ᴜᴘᴅᴀᴛᴇs</h1>
 
 <p align="center">
   <a href="https://telegram.me/VIBEBOTSSUPPORT"><img src="https://img.shields.io/badge/Support-Group-blue?style=for-the-badge&logo=telegram"></a>
   <a href="https://telegram.me/SANATANI_TECH"><img src="https://img.shields.io/badge/Updates-@SANATANI_TECH-blue?style=for-the-badge&logo=telegram"></a>
   <a href="https://telegram.me/SPOTIFY_TECH"><img src="https://img.shields.io/badge/Updates-@SPOTIFY_TECH-blue?style=for-the-badge&logo=telegram"></a>
   <a href="https://telegram.me/VIBEBOTS"><img src="https://img.shields.io/badge/Updates-@VIBEBOTS-blue?style=for-the-badge&logo=telegram"></a>
-  <a href="https://telegram.me/YT_API"><img src="https://img.shields.io/badge/Updates-@YT_API-blue?style=for-the-badge&logo=telegram"></a>
 </p>
 
 ---
-
-## ⚠️ ᴅɪsᴄʟᴀɪᴍᴇʀ
+<h1 align="center">⚠️ ᴅɪsᴄʟᴀɪᴍᴇʀ</h1>
 
 > ᴛʜɪs ᴘʀᴏᴊᴇᴄᴛ ɪs ɪɴᴛᴇɴᴅᴇᴅ ғᴏʀ **ᴇᴅᴜᴄᴀᴛɪᴏɴᴀʟ** ᴀɴᴅ **ᴘᴇʀsᴏɴᴀʟ** ᴜsᴇ ᴏɴʟʏ.  
 > ᴘʟᴇᴀsᴇ ᴄᴏᴍᴘʟʏ ᴡɪᴛʜ ᴛʜᴇ ᴘᴏʟɪᴄɪᴇs ᴏғ ʏᴏᴜᴛᴜʙᴇ & ᴛᴇʟᴇɢʀᴀᴍ ᴡʜɪʟᴇ ᴜsɪɴɢ ɪᴛ.
-
 ---
 
 <p align="center">
