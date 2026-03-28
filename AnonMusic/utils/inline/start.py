@@ -1,4 +1,4 @@
-from pyrogram.types import InlineKeyboardButton, WebAppInfo
+from pyrogram.types import InlineKeyboardButton
 
 import config
 from AnonMusic import app
@@ -29,7 +29,7 @@ def private_panel(_):
             InlineKeyboardButton(text=_["S_B_5"], user_id=config.OWNER_ID),
             InlineKeyboardButton(text=_["S_B_7"], url=config.SUPPORT_CHANNEL),
         ],
-        [InlineKeyboardButton(text=_["S_B_6"], web_app=WebAppInfo(url=config.WEBSITE))],
+        [InlineKeyboardButton(text=_["S_B_10"], url=config.UPSTREAM_REPO)],
     ]
     
     return buttons
