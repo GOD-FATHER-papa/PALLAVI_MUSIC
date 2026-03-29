@@ -5,7 +5,7 @@
 
 from typing import Union
 
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 from AnonMusic import app
 import config
@@ -21,7 +21,6 @@ def help_pannel(_, START: Union[bool, int] = None):
     mark = second if START else first
     upl = InlineKeyboardMarkup(
         [
-            [InlineKeyboardButton(text=_["S_B_6"], web_app=WebAppInfo(url=config.WEBSITE))],
             [
                 InlineKeyboardButton(
                     text=_["H_B_1"],
