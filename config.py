@@ -25,12 +25,9 @@ LOGGER_ID = validate_env_var("LOGGER_ID", cast_type=int)
 OWNER_ID = validate_env_var("OWNER_ID", cast_type=int)
 MONGO_DB_URI = getenv("MONGO_DB_URI")
 
-# 🔐 Get your secret key from Scy — xD: @ScyxD | Get Free Key : @KeyMakerRoBot
-# 📦 Make sure to add all required variables in your .env file.
 BASE_API_URL = getenv("BASE_API_URL", "https://xyz.spotifytech.shop")
 BASE_API_KEY = getenv("BASE_API_KEY")
 
-# promotion website like : Api Docs etc etc..., Please Don't Change This
 WEBSITE = getenv("WEBSITE", "https://xyz.spotifytech.shop")
 COOKIES_URL = getenv("COOKIES_URL")
 
@@ -39,7 +36,7 @@ DURATION_LIMIT_MIN = validate_env_var("DURATION_LIMIT", cast_type=int, default=3
 HEROKU_APP_NAME = getenv("HEROKU_APP_NAME")
 HEROKU_API_KEY = getenv("HEROKU_API_KEY")
 
-UPSTREAM_REPO = getenv("UPSTREAM_REPO", "https://github.com/TheAloneTech/ScyMusic")
+UPSTREAM_REPO = getenv("UPSTREAM_REPO", "https://github.com/ScyxD/AnonMusicUp")
 UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "Master")
 GIT_TOKEN = getenv("GIT_TOKEN")
 
@@ -55,6 +52,8 @@ SPOTIFY_CLIENT_ID = getenv("SPOTIFY_CLIENT_ID", "22b6125bfe224587b722d6815002db2
 SPOTIFY_CLIENT_SECRET = getenv("SPOTIFY_CLIENT_SECRET", "c9c63c6fbf2f467c8bc68624851e9773")
 
 PLAYLIST_FETCH_LIMIT = validate_env_var("PLAYLIST_FETCH_LIMIT", cast_type=int, default=25)
+
+AUTH_LIMIT = validate_env_var("AUTH_LIMIT", cast_type=int, default=15)
 
 TG_AUDIO_FILESIZE_LIMIT = validate_env_var("TG_AUDIO_FILESIZE_LIMIT", cast_type=int, default=204857600)
 TG_VIDEO_FILESIZE_LIMIT = validate_env_var("TG_VIDEO_FILESIZE_LIMIT", cast_type=int, default=2071824)
