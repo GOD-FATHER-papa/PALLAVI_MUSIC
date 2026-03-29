@@ -90,7 +90,7 @@ start_4 : "<b>Supergroup needed</b>\n\nPlease convert your <b>group</b> to <b>su
 start_5 : "<b>↝ Blacklisted chat ↜</b>\n\nThis chat is blacklisted on {0} database.\nRequest a <a href={1}>sudo user</a> to unblacklist your chat or visit <a href={2}>support chat.</a>"
 start_6 : "<b>Track information</b>\n\n📌 <b>Title :</b> {0}\n\n⏳ <b>Duration :</b> {1} minutes\n👀 <b>Views :</b> <code>{2}</code>\n⏰ <b>Published on :</b> {3}\n📎 <b>Channel :</b> <a href={4}>{5}</a>\n\n<u><b>Search powered by {6}</b></u>"
 
-help_1 : "<b>Explore detailed command categories below.</b>\n\n๏ For assistance or queries, join our <a href={0}>support chat</a>.\n\n๏ Use all commands with the prefix: <code>/</code>"
+help_1 : "<b>Explore detailed command categories below.</b>\nFor assistance or queries, join our <a href={0}>support chat</a>.\n\n— Use all commands with the prefix: <code>/</code>"
 help_2 : "<b>Tap the button below to access the complete help guide in your private chat.</b>\n\n๏ Avoid clutter and keep group conversations smooth."
 
 lang_1 : "Please choose the language which you wanna set as this group's default language :"
