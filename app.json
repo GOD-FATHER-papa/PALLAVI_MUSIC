@@ -1,0 +1,84 @@
+{
+  "name": "ᴀɴᴏɴ — ᴍᴜsɪᴄ v2",
+  "description": "ɪᴛ's ᴀ ᴛᴇʟᴇɢʀᴀᴍ ᴍᴜsɪᴄ ᴘʟᴀʏᴇʀ ʙᴏᴛ, ᴡʀɪᴛᴛᴇɴ ɪɴ ᴘʏᴛʜᴏɴ ᴡɪᴛʜ ᴘʏʀᴏɢʀᴀᴍ ᴀɴᴅ ᴘʏ-ᴛɢᴄᴀʟʟs.",
+  "logo": "https://files.catbox.moe/f4ui12.jpg",
+  "keywords": [
+    "Anon",
+    "MusicBot",
+    "bot",
+    "VibeBots",
+    "pyrogram",
+    "python3",
+    "telegram",
+    "telegram-bot"
+  ],
+  "env": {
+    "API_HASH": {
+      "description": "❖ ɢᴇᴛ ᴛʜɪs ᴠᴀʟᴜᴇ ғʀᴏᴍ : https://my.telegram.org",
+      "value": "",
+      "required": true
+    },
+    "API_ID": {
+      "description": "❖ ɢᴇᴛ ᴛʜɪs ᴠᴀʟᴜᴇ ғʀᴏᴍ : https://my.telegram.org",
+      "value": "",
+      "required": true
+    },
+    "BASE_API_KEY": {
+      "description": "❖ ʏᴏᴜᴛᴜʙᴇ ᴀᴘɪ ᴜʀʟ, ɢᴇᴛ ғʀᴇᴇ ғʀᴏᴍ : https://t.me/TheSachinxD",
+      "value": "",
+      "required": false
+    },
+    "BASE_API_URL": {
+      "description": "❖ ʏᴏᴜᴛᴜʙᴇ ᴀᴘɪ ᴜʀʟ",
+      "value": "https://api.vibebots.fun",
+      "required": true
+    },
+    "BOT_TOKEN": {
+      "description": "❖ ᴀ ʙᴏᴛ ᴛᴏᴋᴇɴ ғʀᴏᴍ : https://t.me/Botfather",
+      "value": "",
+      "required": true
+    },
+    "HEROKU_API_KEY": {
+      "description": "❖ ʏᴏᴜʀ ʜᴇʀᴏᴋᴜ ᴀᴄᴄᴏᴜɴᴛ's ᴀᴘɪ ᴋᴇʏ",
+      "value": "",
+      "required": false
+    },
+    "HEROKU_APP_NAME": {
+      "description": "❖ ʏᴏᴜʀ ʜᴇʀᴏᴋᴜ ᴀᴘᴘ ɴᴀᴍᴇ",
+      "value": "",
+      "required": false
+    },
+    "LOGGER_ID": {
+      "description": "❖ ʏᴏᴜʀ ʟᴏɢ ɢʀᴏᴜᴘ ᴄʜᴀᴛ ɪ'ᴅ, ᴀᴅᴅ ʏᴏᴜʀ ʙᴏᴛ ᴀɴᴅ ᴘʀᴏᴍᴏᴛᴇ ᴀs ᴀɴ ᴀᴅᴍɪɴ ᴡɪᴛʜ ғᴜʟʟ ʀɪɢʜᴛs!. ᴜsᴇ ᴏɴʟʏ ɢʀᴏᴜᴘ ᴄʜᴀᴛ ɪ'ᴅ — ᴅᴏɴ'ᴛ ᴜsᴇ ᴄʜᴀɴɴᴇʟ ɪ'ᴅ.",
+      "value": "",
+      "required": true
+    },
+    "MONGO_DB_URI": {
+      "description": "❖ ɢᴇᴛ ᴀ ᴍᴏɴɢᴏᴅʙ ᴜʀʟ ғʀᴏᴍ : https://cloud.mongodb.com.",
+      "value": "",
+      "required": true
+    },
+    "OWNER_ID": {
+      "description": "❖ ᴛʜᴇ ᴜsᴇʀ ɪᴅ ᴏғ ᴜsᴇʀ ᴡʜᴏᴍ ʏᴏᴜ ᴡᴏᴜʟᴅ ʟɪᴋᴇ ᴛᴏ ᴀᴅᴅ ᴀs ᴏᴡɴᴇʀ. ɢᴇᴛ ғʀᴏᴍ - @SanatanisVibeBot",
+      "value": "",
+      "required": true
+    },
+    "STRING_SESSION": {
+      "description": "❖ ᴀ ᴘʏʀᴏɢʀᴀᴍ ᴠ2 sᴛʀɪɴɢ sᴇssɪᴏɴ ғʀᴏᴍ @Stringxhackxbot ᴏɴ ᴛᴇʟᴇɢʀᴀᴍ, ᴀᴅᴅ ʏᴏᴜʀ ʙᴏᴛ ᴀɴᴅ ᴘʀᴏᴍᴏᴛᴇ ᴀs ᴀɴ ᴀᴅᴍɪɴ ᴡɪᴛʜ ғᴜʟʟ ʀɪɢʜᴛs!.",
+      "value": "",
+      "required": true
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    },
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git"
+    }
+  ],
+  "stack": "container"
+}
