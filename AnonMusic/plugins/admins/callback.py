@@ -61,11 +61,13 @@ async def admin_callback_handler(client, query: CallbackQuery, _):
         return await quick_alert(query, _["general_5"], True)
     
     if command == "UpVote":
-        return await handle_upvote(query, chat_id, counter, _)
+        await handle_upvote(query, chat_id, counter, _)
+        return
     
     if not await is_nonadmin_chat(query.message.chat.id):
         if not is_admin_or_sudo(query, query.message.chat.id):
-            return await quick_alert(query, _["admin_14"], True)
+            await quick_alert(query, _["admin_14"], True)
+            return
     
     await handle_stream_control(query, chat_id, command, _, counter)
 
@@ -93,7 +95,6 @@ async def handle_upvote(query: CallbackQuery, chat_id: int, counter: str, _):
     if current_votes >= upvote_limit:
         await finalize_upvote(query, chat_id, counter, upvote_limit, _)
     else:
-        # Update button with new vote count
         button = InlineKeyboardMarkup([[
             InlineKeyboardButton(
                 text=f"👍 {current_votes}",
@@ -107,7 +108,6 @@ async def finalize_upvote(query: CallbackQuery, chat_id: int, counter: str, upvo
     try:
         exists = confirmer[chat_id][query.message.id]
         current = db[chat_id][0]
-        
         if current["vidid"] != exists["vidid"] or current["file"] != exists["file"]:
             return await query.edit_message_text(_["admin_35"])
     except:
@@ -201,13 +201,16 @@ async def process_next_track(query: CallbackQuery, chat_id: int, check: list, tx
         if not success:
             return await query.message.reply_text(_["admin_7"].format(title), reply_markup=close_markup(_))
         await Anony.skip_stream(chat_id, link, video=is_video, image=image)
+    
     elif "vid_" in track["file"]:
         mystic = await query.message.reply_text(_["call_7"], disable_web_page_preview=True)
         file_path, _ = await YouTube.download(videoid, mystic, videoid=True, video=is_video)
         await mystic.delete()
         await Anony.skip_stream(chat_id, file_path, video=is_video, image=image)
+    
     elif "index_" in track["file"]:
         await Anony.skip_stream(chat_id, videoid, video=is_video)
+    
     else:
         await Anony.skip_stream(chat_id, track["file"], video=is_video, image=image)
     
