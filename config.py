@@ -79,11 +79,11 @@ confirmer = {}
 file_cache: dict[str, float] = {}
 
 
-START_IMG_URL = getenv("START_IMG_URL", "https://files.catbox.moe/ev3q99.jpg")
-PING_IMG_URL = getenv("PING_IMG_URL", "https://files.catbox.moe/4s0omp.jpg")
+START_IMG_URL = getenv("START_IMG_URL", "https://files.catbox.moe/ihr1qu.jpg")
+PING_IMG_URL = getenv("PING_IMG_URL", "https://files.catbox.moe/fhycjz.jpg")
 
 PLAYLIST_IMG_URL = "https://files.catbox.moe/v7u8ji.jpg"
-STATS_IMG_URL = "https://files.catbox.moe/7g7j9f.jpg"
+STATS_IMG_URL = "https://files.catbox.moe/fhycjz.jpg"
 TELEGRAM_AUDIO_URL = "https://files.catbox.moe/fahcob.jpg"
 TELEGRAM_VIDEO_URL = "https://files.catbox.moe/gy14qk.jpg"
 STREAM_IMG_URL = "https://files.catbox.moe/h0m0wz.jpg"
