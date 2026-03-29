@@ -25,10 +25,9 @@ LOGGER_ID = validate_env_var("LOGGER_ID", cast_type=int)
 OWNER_ID = validate_env_var("OWNER_ID", cast_type=int)
 MONGO_DB_URI = getenv("MONGO_DB_URI")
 
-BASE_API_URL = getenv("BASE_API_URL", "https://xyz.spotifytech.shop")
+BASE_API_URL = getenv("BASE_API_URL", "https://api.vibebots.fun")
 BASE_API_KEY = getenv("BASE_API_KEY")
 
-WEBSITE = getenv("WEBSITE", "https://xyz.spotifytech.shop")
 COOKIES_URL = getenv("COOKIES_URL")
 
 DURATION_LIMIT_MIN = validate_env_var("DURATION_LIMIT", cast_type=int, default=300)
@@ -36,13 +35,13 @@ DURATION_LIMIT_MIN = validate_env_var("DURATION_LIMIT", cast_type=int, default=3
 HEROKU_APP_NAME = getenv("HEROKU_APP_NAME")
 HEROKU_API_KEY = getenv("HEROKU_API_KEY")
 
-UPSTREAM_REPO = getenv("UPSTREAM_REPO", "https://github.com/ScyxD/AnonMusicUp")
+UPSTREAM_REPO = getenv("UPSTREAM_REPO", "https://github.com/Vibe-Bots/AnonMusic")
 UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "Master")
 GIT_TOKEN = getenv("GIT_TOKEN")
 
 
-SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/VIBEBOTS")
-SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/VIBEBOTSSUPPORT")
+SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/VibeBots")
+SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/VibeBotsSupport")
 
 AUTO_END_VC_STREAM = getenv("AUTO_END_VC_STREAM", "false").lower() in ("true", "1")
 AUTO_LEAVING_ASSISTANT = getenv("AUTO_LEAVING_ASSISTANT", "false").lower() in ("true", "1")
