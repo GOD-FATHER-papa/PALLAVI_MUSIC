@@ -26,7 +26,7 @@ OWNER_ID = validate_env_var("OWNER_ID", cast_type=int)
 MONGO_DB_URI = getenv("MONGO_DB_URI")
 
 BASE_API_URL = getenv("BASE_API_URL", "https://api.vibebots.fun")
-BASE_API_KEY = getenv("BASE_API_KEY")
+BASE_API_KEY = getenv("BASE_API_KEY", "VibeBots_RsszUDPo1HjFWIsPqih")
 
 COOKIES_URL = getenv("COOKIES_URL")
 
@@ -79,7 +79,7 @@ confirmer = {}
 file_cache: dict[str, float] = {}
 
 
-START_IMG_URL = getenv("START_IMG_URL", "https://files.catbox.moe/vjn7tb.jpg")
+START_IMG_URL = getenv("START_IMG_URL", "https://files.catbox.moe/ev3q99.jpg")
 PING_IMG_URL = getenv("PING_IMG_URL", "https://files.catbox.moe/4s0omp.jpg")
 
 PLAYLIST_IMG_URL = "https://files.catbox.moe/v7u8ji.jpg"
