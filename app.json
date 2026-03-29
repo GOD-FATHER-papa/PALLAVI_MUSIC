@@ -1,5 +1,5 @@
 {
-  "name": "ᴀɴᴏɴ — ᴍᴜsɪᴄ",
+  "name": "ᴀɴᴏɴ — ᴍᴜsɪᴄ v2",
   "description": "ɪᴛ's ᴀ ᴛᴇʟᴇɢʀᴀᴍ ᴍᴜsɪᴄ ᴘʟᴀʏᴇʀ ʙᴏᴛ, ᴡʀɪᴛᴛᴇɴ ɪɴ ᴘʏᴛʜᴏɴ ᴡɪᴛʜ ᴘʏʀᴏɢʀᴀᴍ ᴀɴᴅ ᴘʏ-ᴛɢᴄᴀʟʟs.",
   "logo": "https://files.catbox.moe/f4ui12.jpg",
   "keywords": [
@@ -24,13 +24,13 @@
       "required": true
     },
     "BASE_API_KEY": {
-      "description": "❖ ʏᴏᴜᴛᴜʙᴇ ᴀᴘɪ ᴜʀʟ, ɢᴇᴛ ғʀᴇᴇ ғʀᴏᴍ : https://t.me/KeyMakerRoBot",
+      "description": "❖ ʏᴏᴜᴛᴜʙᴇ ᴀᴘɪ ᴜʀʟ, ɢᴇᴛ ғʀᴇᴇ ғʀᴏᴍ : https://t.me/TheSachinxD",
       "value": "",
-      "required": true
+      "required": false
     },
     "BASE_API_URL": {
-      "description": "❖ ʏᴏᴜᴛᴜʙᴇ ᴀᴘɪ ᴜʀʟ, ɢᴇᴛ ғʀᴇᴇ ғʀᴏᴍ : https://t.me/KeyMakerRoBot",
-      "value": "https://xyz.spotifytech.shop",
+      "description": "❖ ʏᴏᴜᴛᴜʙᴇ ᴀᴘɪ ᴜʀʟ",
+      "value": "https://api.vibebots.fun",
       "required": true
     },
     "BOT_TOKEN": {
@@ -59,12 +59,12 @@
       "required": true
     },
     "OWNER_ID": {
-      "description": "❖ ᴛʜᴇ ᴜsᴇʀ ɪᴅ ᴏғ ᴜsᴇʀ ᴡʜᴏᴍ ʏᴏᴜ ᴡᴏᴜʟᴅ ʟɪᴋᴇ ᴛᴏ ᴀᴅᴅ ᴀs ᴏᴡɴᴇʀ. ɢᴇᴛ ғʀᴏᴍ - @SanataniVibeBot",
+      "description": "❖ ᴛʜᴇ ᴜsᴇʀ ɪᴅ ᴏғ ᴜsᴇʀ ᴡʜᴏᴍ ʏᴏᴜ ᴡᴏᴜʟᴅ ʟɪᴋᴇ ᴛᴏ ᴀᴅᴅ ᴀs ᴏᴡɴᴇʀ. ɢᴇᴛ ғʀᴏᴍ - @SanatanisVibeBot",
       "value": "",
       "required": true
     },
     "STRING_SESSION": {
-      "description": "❖ ᴀ ᴘʏʀᴏɢʀᴀᴍ ᴠ2 sᴛʀɪɴɢ sᴇssɪᴏɴ ғʀᴏᴍ @STRINGxHACKxBOT ᴏɴ ᴛᴇʟᴇɢʀᴀᴍ, ᴀᴅᴅ ʏᴏᴜʀ ʙᴏᴛ ᴀɴᴅ ᴘʀᴏᴍᴏᴛᴇ ᴀs ᴀɴ ᴀᴅᴍɪɴ ᴡɪᴛʜ ғᴜʟʟ ʀɪɢʜᴛs!.",
+      "description": "❖ ᴀ ᴘʏʀᴏɢʀᴀᴍ ᴠ2 sᴛʀɪɴɢ sᴇssɪᴏɴ ғʀᴏᴍ @Stringxhackxbot ᴏɴ ᴛᴇʟᴇɢʀᴀᴍ, ᴀᴅᴅ ʏᴏᴜʀ ʙᴏᴛ ᴀɴᴅ ᴘʀᴏᴍᴏᴛᴇ ᴀs ᴀɴ ᴀᴅᴍɪɴ ᴡɪᴛʜ ғᴜʟʟ ʀɪɢʜᴛs!.",
       "value": "",
       "required": true
     }
