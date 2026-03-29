@@ -1,133 +1,135 @@
-HELP_1 = """<b><u>❖ ʜᴇʀᴇ ɪs ᴛʜᴇ ʜᴇʟᴘ ғᴏʀ ᴀᴅᴍɪɴ ᴍᴏᴅᴜʟᴇ :</u></b>
+# Copyright (c) 2026 Vibe-Bots
+# Open-sourced under MIT terms.
+# Included within AnonMusic framework.
 
-<b><u>❖ ᴀᴅᴍɪɴ ᴄᴏᴍᴍᴀɴᴅs :</u></b>
 
-<b>ᴊᴜsᴛ ᴀᴅᴅ <code>ᴄ</code> ɪɴ ᴛʜᴇ sᴛᴀʀᴛɪɴɢ ᴏғ ᴛʜᴇ ᴄᴏᴍᴍᴀɴᴅs ᴛᴏ ᴜsᴇ ᴛʜᴇᴍ ғᴏʀ ᴄʜᴀɴɴᴇʟs.</b>
+HELP_1 = """<b><u>Here is the help for admin module :</u></b>
 
-<b>๏ /pause -</b> ᴘᴀᴜsᴇ ᴛʜᴇ ᴄᴜʀʀᴇɴᴛ ᴘʟᴀʏɪɴɢ sᴛʀᴇᴀᴍ  
-<b>๏ /resume -</b> ʀᴇsᴜᴍᴇ ᴛʜᴇ ᴘᴀᴜsᴇᴅ sᴛʀᴇᴀᴍ  
-<b>๏ /skip -</b> sᴋɪᴘ ᴛʜᴇ ᴄᴜʀʀᴇɴᴛ ᴘʟᴀʏɪɴɢ sᴛʀᴇᴀᴍ ᴀɴᴅ sᴛᴀʀᴛ ᴛʜᴇ ɴᴇxᴛ ᴛʀᴀᴄᴋ ɪɴ ǫᴜᴇᴜᴇ  
-<b>๏ /end ᴏʀ /stop -</b> ᴄʟᴇᴀʀs ᴛʜᴇ ǫᴜᴇᴜᴇ ᴀɴᴅ ᴇɴᴅ ᴛʜᴇ ᴄᴜʀʀᴇɴᴛ ᴘʟᴀʏɪɴɢ sᴛʀᴇᴀᴍ  
-<b>๏ /queue -</b> sʜᴏᴡs ᴛʜᴇ ǫᴜᴇᴜᴇᴅ ᴛʀᴀᴄᴋs ʟɪsᴛ  
-<b>๏ /loop [disable/enable] ᴏʀ [between 1:10] -</b> ᴡʜᴇɴ ᴀᴄᴛɪᴠᴀᴛᴇᴅ ʙᴏᴛ ᴡɪʟʟ ᴘʟᴀʏ ᴛʜᴇ ᴄᴜʀʀᴇɴᴛ sᴛʀᴇᴀᴍ ɪɴ ʟᴏᴏᴘ ғᴏʀ 10 ᴛɪᴍᴇs ᴏʀ ᴛʜᴇ ɴᴜᴍʙᴇʀ ᴏғ ʀᴇǫᴜᴇsᴛᴇᴅ ʟᴏᴏᴘs  
-<b>๏ /shuffle -</b> sʜᴜғғʟᴇ ᴛʜᴇ ǫᴜᴇᴜᴇᴅ ᴛʀᴀᴄᴋs  
-<b>๏ /seek -</b> sᴇᴇᴋ ᴛʜᴇ sᴛʀᴇᴀᴍ ᴛᴏ ᴛʜᴇ ɢɪᴠᴇɴ ᴅᴜʀᴀᴛɪᴏɴ  
-<b>๏ /seekback -</b> ʙᴀᴄᴋᴡᴀʀᴅ sᴇᴇᴋ ᴛʜᴇ sᴛʀᴇᴀᴍ ᴛᴏ ᴛʜᴇ ɢɪᴠᴇɴ ᴅᴜʀᴀᴛɪᴏɴ  
+<b><u>Admin commands :</u></b>
+
+<b>Just add <code>c</code> in the starting of the commands to use them for channels.</b>
+
+<b>๏ /pause -</b> pause the current playing stream
+<b>๏ /resume -</b> resume the paused stream
+<b>๏ /skip -</b> skip the current playing stream and start the next track in queue
+<b>๏ /end or /stop -</b> clears the queue and end the current playing stream
+<b>๏ /queue -</b> shows the queued tracks list
+<b>๏ /loop [disable/enable] or [between 1:10] -</b> when activated bot will play the current stream in loop for 10 times or the number of requested loops
+<b>๏ /shuffle -</b> shuffle the queued tracks
+<b>๏ /seek -</b> seek the stream to the given duration
+<b>๏ /seekback -</b> backward seek the stream to the given duration
 """
 
-HELP_2 = """<b><u>❖ ʜᴇʀᴇ ɪs ᴛʜᴇ ʜᴇʟᴘ ғᴏʀ ᴀᴜᴛʜ ᴍᴏᴅᴜʟᴇ :</u></b>
+HELP_2 = """<b><u>Here is the help for auth module :</u></b>
 
-<b><u>❖ ᴀᴜᴛʜ ᴜsᴇʀs :</u></b>
+<b><u>Auth users :</u></b>
 
-<b>ᴀᴜᴛʜ ᴜsᴇʀs ᴄᴀɴ ᴜsᴇ ᴀᴅᴍɪɴ ʀɪɢʜᴛs ɪɴ ᴛʜᴇ ʙᴏᴛ ᴡɪᴛʜᴏᴜᴛ ᴀᴅᴍɪɴ ʀɪɢʜᴛs ɪɴ ᴛʜᴇ ᴄʜᴀᴛ. [ᴀᴅᴍɪɴs ᴏɴʟʏ]</b>
+<b>Auth users can use admin rights in the bot without admin rights in the chat. [admins only]</b>
 
-<b>๏ /auth [ᴜsᴇʀɴᴀᴍᴇ] -</b> ᴀᴅᴅ ᴀ ᴜsᴇʀ ᴛᴏ ᴀᴜᴛʜ ʟɪsᴛ ᴏғ ᴛʜᴇ ʙᴏᴛ.
+<b>๏ /auth [username] -</b> add a user to auth list of the bot.
 
-<b>๏ /unauth [ᴜsᴇʀɴᴀᴍᴇ] -</b> ʀᴇᴍᴏᴠᴇ ᴀ ᴀᴜᴛʜ ᴜsᴇʀ ғʀᴏᴍ ᴛʜᴇ ᴀᴜᴛʜ ᴜsᴇʀs ʟɪsᴛ.
+<b>๏ /unauth [username] -</b> remove a auth user from the auth users list.
 
-<b>๏ /authusers -</b> sʜᴏᴡs ᴛʜᴇ ᴀᴜᴛʜ ᴜsᴇʀs ʟɪsᴛ ᴏғ ᴛʜᴇ ɢʀᴏᴜᴘ.
+<b>๏ /authusers -</b> shows the auth users list of the group.
 """
 
-HELP_3 = """<b><u>❖ ʜᴇʀᴇ ɪs ᴛʜᴇ ʜᴇʟᴘ ғᴏʀ ʙʟᴀᴄᴋʟɪsᴛ ᴍᴏᴅᴜʟᴇ :</u></b>
+HELP_3 = """<b><u>Here is the help for blacklist module :</u></b>
 
-<b><u>❖ ʙʟᴀᴄᴋʟɪsᴛ ᴄʜᴀᴛ :</u></b>
+<b><u>Blacklist chat :</u></b>
 
-<b>๏ /blacklistchat [ᴄʜᴀᴛ ɪᴅ] -</b> ʙʟᴀᴄᴋʟɪsᴛ ᴀ ᴄʜᴀᴛ ғʀᴏᴍ ᴜsɪɴɢ ᴛʜᴇ ʙᴏᴛ.
+<b>๏ /blacklistchat [chat id] -</b> blacklist a chat from using the bot.
 
-<b>๏ /whitelistchat [ᴄʜᴀᴛ ɪᴅ] -</b> ᴡʜɪᴛᴇʟɪsᴛ ᴛʜᴇ ʙʟᴀᴄᴋʟɪsᴛᴇᴅ ᴄʜᴀᴛ.
+<b>๏ /whitelistchat [chat id] -</b> whitelist the blacklisted chat.
 
-<b>๏ /blacklistedchat -</b> sʜᴏᴡs ᴛʜᴇ ʟɪsᴛ ᴏғ ʙʟᴀᴄᴋʟɪsᴛᴇᴅ ᴄʜᴀᴛs.
+<b>๏ /blacklistedchat -</b> shows the list of blacklisted chats.
 
-<b><u>❖ ʙʟᴏᴄᴋ ᴜsᴇʀs:</u></b>
+<b><u>Block users:</u></b>
 
-<b>๏ /block [ᴜsᴇʀɴᴀᴍᴇ ᴏʀ ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴄʜᴜᴛɪʏᴀ] -</b> sᴛᴀʀᴛs ɪɢɴᴏʀɪɴɢ ᴛʜᴇ ᴄʜᴜᴛɪʏᴀ, sᴏ ᴛʜᴀᴛ ʜᴇ ᴄᴀɴ'ᴛ ᴜsᴇ ʙᴏᴛ ᴄᴏᴍᴍᴀɴᴅs.
+<b>๏ /block [username or reply to a user] -</b> starts ignoring the user, so that he can't use bot commands.
 
-<b>๏ /unblock [ᴜsᴇʀɴᴀᴍᴇ ᴏʀ ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴜsᴇʀ] -</b> ᴜɴʙʟᴏᴄᴋs ᴛʜᴇ ʙʟᴏᴄᴋᴇᴅ ᴜsᴇʀ.
+<b>๏ /unblock [username or reply to a user] -</b> unblocks the blocked user.
 
-<b>๏ /blockedusers -</b> sʜᴏᴡs ᴛʜᴇ ʟɪsᴛ ᴏғ ʙʟᴏᴄᴋᴇᴅ ᴜsᴇʀs.
+<b>๏ /blockedusers -</b> shows the list of blocked users.
 """
 
-HELP_4 = """<b><u>❖ ʜᴇʀᴇ ɪs ᴛʜᴇ ʜᴇʟᴘ ғᴏʀ ʙʀᴏᴀᴅᴄᴀsᴛ ᴍᴏᴅᴜʟᴇ :</b></u>
+HELP_4 = """<b><u>Here is the help for broadcast module :</b></u>
 
-<b><u>❖ ʙʀᴏᴀᴅᴄᴀsᴛ ғᴇᴀᴛᴜʀᴇ [ᴏɴʟʏ ғᴏʀ sᴜᴅᴏᴇʀs] :</b></u>
+<b><u>Broadcast feature [only for sudoers] :</b></u>
 
-<b>๏ /broadcast [ᴍᴇssᴀɢᴇ ᴏʀ ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴍᴇssᴀɢᴇ] -</b> sᴇɴᴅ ᴀ ʙʀᴏᴀᴅᴄᴀsᴛ ᴍᴇssᴀɢᴇ ᴛᴏ ᴀʟʟ sᴇʀᴠᴇᴅ ᴄʜᴀᴛs ᴏғ ᴛʜᴇ ʙᴏᴛ.
+<b>๏ /broadcast [message or reply to a message] -</b> send a broadcast message to all served chats of the bot.
 
-<b><u>❖ ʙʀᴏᴀᴅᴄᴀsᴛɪɴɢ ᴍᴏᴅᴇs:</b></u>
-๏ <code>-pin</code> : ᴘɪɴs ʏᴏᴜʀ ʙʀᴏᴀᴅᴄᴀsᴛᴇᴅ ᴍᴇssᴀɢᴇs ɪɴ sᴇʀᴠᴇᴅ ᴄʜᴀᴛs.
-๏ <code>-pinloud</code> : ᴘɪɴs ʏᴏᴜʀ ʙʀᴏᴀᴅᴄᴀsᴛᴇᴅ ᴍᴇssᴀɢᴇ ɪɴ sᴇʀᴠᴇᴅ ᴄʜᴀᴛs ᴀɴᴅ sᴇɴᴅs ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ᴛᴏ ᴛʜᴇ ᴍᴇᴍʙᴇʀs.
-๏ <code>-user</code> : ʙʀᴏᴀᴅᴄᴀsᴛs ᴛʜᴇ ᴍᴇssᴀɢᴇ ᴛᴏ ᴛʜᴇ ᴜsᴇʀs ᴡʜᴏ ʜᴀᴠᴇ sᴛᴀʀᴛᴇᴅ ʏᴏᴜʀ ʙᴏᴛ.
-๏ <code>-nobot</code> : ғᴏʀᴄᴇs ᴛʜᴇ ʙᴏᴛ ᴛᴏ ɴᴏᴛ ʙʀᴏᴀᴅᴄᴀsᴛ ᴛʜᴇ ᴍᴇssᴀɢᴇ.
-<pre language='python'>๏ ᴇxᴀᴍᴘʟᴇ : /broadcast -user -pin ᴛᴇsᴛɪɴɢ ʙʀᴏᴀᴅᴄᴀsᴛ</pre>
+<b><u>Broadcasting modes:</b></u>
+๏ <code>-pin</code> : pins your broadcasted messages in served chats.
+๏ <code>-pinloud</code> : pins your broadcasted message in served chats and sends notification to the members.
+๏ <code>-user</code> : broadcasts the message to the users who have started your bot.
+๏ <code>-nobot</code> : forces the bot to not broadcast the message.
+
+<pre language='python'>๏ example : /broadcast -user -pin testing broadcast</pre>
+
 """
 
-HELP_5 = """<b><u>❖ ʜᴇʀᴇ ɪs ᴛʜᴇ ʜᴇʟᴘ ғᴏʀ ᴘɪɴɢ ᴍᴏᴅᴜʟᴇ :</b></u>
+HELP_5 = """<b><u>Here is the help for ping module :</b></u>
 
-<b><u>❖ ᴘɪɴɢ ᴄᴏᴍᴍᴀɴᴅ :</b></u>
+<b><u>Ping command :</b></u>
 
-<b>๏ /ping -</b> sʜᴏᴡ ᴛʜᴇ ᴘɪɴɢ ᴀɴᴅ sʏsᴛᴇᴍ sᴛᴀᴛs ᴏғ ᴛʜᴇ ʙᴏᴛ.
-<b>๏ /stats -</b> ɢᴇᴛ ᴛᴏᴘ 10 ᴛʀᴀᴄᴋ ɢʟᴏʙᴀʟ sᴛᴀᴛs, ᴛᴏᴘ 10 ᴜsᴇʀs ᴏғ ᴛʜᴇ ʙᴏᴛ, ᴛᴏᴘ 10 ᴄʜᴀᴛs ᴏɴ ᴛʜᴇ ʙᴏᴛ, ᴛᴏᴘ 10 ᴘʟᴀʏᴇᴅ ɪɴ ᴛʜᴇ ᴄʜᴀᴛ ᴀɴᴅ ᴍᴀɴʏ ᴍᴏʀᴇ...
+<b>๏ /ping -</b> show the ping and system stats of the bot.
+<b>๏ /stats -</b> get top 10 track global stats, top 10 users of the bot, top 10 chats on the bot, top 10 played in the chat and many more...
 """
 
-HELP_6 = """<b><u>❖ ʜᴇʀᴇ ɪs ᴛʜᴇ ʜᴇʟᴘ ғᴏʀ ᴘʟᴀʏ ᴍᴏᴅᴜʟᴇ :</b></u>
+HELP_6 = """<b><u>Here is the help for play module :</b></u>
 
-<b><u>❖ ᴘʟᴀʏ ᴄᴏᴍᴍᴀɴᴅs:</b></u>
+<b><u>Play commands:</b></u>
 
-<b>๏ c</b> sᴛᴀɴᴅs ғᴏʀ ᴄʜᴀɴɴᴇʟ ᴘʟᴀʏ.  
-<b>๏ v</b> sᴛᴀɴᴅs ғᴏʀ ᴠɪᴅᴇᴏ ᴘʟᴀʏ.  
-<b>๏ force</b> sᴛᴀɴᴅs ғᴏʀ ғᴏʀᴄᴇ ᴘʟᴀʏ.
+<b>๏ c</b> stands for channel play.
+<b>๏ v</b> stands for video play.
+<b>๏ force</b> stands for force play.
 
-<b>๏ /play ᴏʀ /vplay ᴏʀ /cplay -</b> sᴛᴀʀᴛs sᴛʀᴇᴀᴍɪɴɢ ᴛʜᴇ ʀᴇǫᴜᴇsᴛᴇᴅ ᴛʀᴀᴄᴋ ᴏɴ ᴠɪᴅᴇᴏᴄʜᴀᴛ.
-<b>๏ /playforce ᴏʀ /vplayforce ᴏʀ /cplayforce -</b> ғᴏʀᴄᴇ ᴘʟᴀʏ sᴛᴏᴘs ᴛʜᴇ ᴏɴɢᴏɪɴɢ sᴛʀᴇᴀᴍ ᴀɴᴅ sᴛᴀʀᴛs sᴛʀᴇᴀᴍɪɴɢ ᴛʜᴇ ʀᴇǫᴜᴇsᴛᴇᴅ ᴛʀᴀᴄᴋ.
-<b>๏ /channelplay [ᴄʜᴀᴛ ᴜsᴇʀɴᴀᴍᴇ ᴏʀ ɪᴅ] ᴏʀ [ᴅɪsᴀʙʟᴇ] -</b> ᴄᴏɴɴᴇᴄᴛ ᴄʜᴀɴɴᴇʟ ᴛᴏ ᴀ ɢʀᴏᴜᴘ ᴀɴᴅ sᴛᴀʀᴛs sᴛʀᴇᴀᴍɪɴɢ ᴛʀᴀᴄᴋs ʙʏ ᴛʜᴇ ʜᴇʟᴘ ᴏғ ᴄᴏᴍᴍᴀɴᴅs sᴇɴᴛ ɪɴ ɢʀᴏᴜᴘ.
+<b>๏ /play or /vplay or /cplay -</b> starts streaming the requested track on videochat.
+<b>๏ /playforce or /vplayforce or /cplayforce -</b> force play stops the ongoing stream and starts streaming the requested track.
+<b>๏ /channelplay [chat username or id] or [disable] -</b> connect channel to a group and starts streaming tracks by the help of commands sent in group.
 """
 
-HELP_7 = """<b><u>❖ ʜᴇʀᴇ ɪs ᴛʜᴇ ʜᴇʟᴘ ғᴏʀ sᴜᴅᴏ ᴍᴏᴅᴜʟᴇ :</b></u>
+HELP_7 = """<b><u>Here is the help for sudo module :</b></u>
 
-<b>❖ ᴍᴇᴀɴɪɴɢ ᴏғ ᴘᴀɪᴅ ᴏʀ ғʀᴇᴇ :</b>
-<b>๏ ғʀᴇᴇ —</b> ғᴏʀ ᴘʀᴏ ᴄᴏᴅᴇʀs 😎
-<b>๏ ᴘᴀɪᴅ —/b> sʜᴏᴡs ʏᴏᴜʀ sᴛᴀᴛᴜs 😉
+<b>Storage cleaner :</b>
+๏ <b>/clean</b> – view storage usage & cleanable folders
+๏ click buttons to clean specific folders :
+├ downloads
+├ cache
+└ temp
+๏ <b>clean all</b> – cleans everything in one go
+๏ folder structure, size & file count included
+๏ full disk stats also shown
 
-<b>❖ sᴛᴏʀᴀɢᴇ ᴄʟᴇᴀɴᴇʀ — ᴘᴀɪᴅ :</b>
-๏ <b>/clean</b> – ᴠɪᴇᴡ sᴛᴏʀᴀɢᴇ ᴜsᴀɢᴇ & ᴄʟᴇᴀɴᴀʙʟᴇ ғᴏʟᴅᴇʀs
-๏ ᴄʟɪᴄᴋ ʙᴜᴛᴛᴏɴs ᴛᴏ ᴄʟᴇᴀɴ sᴘᴇᴄɪғɪᴄ ғᴏʟᴅᴇʀs :
-   ├ ᴅᴏᴡɴʟᴏᴀᴅs
-   ├ ᴄᴀᴄʜᴇ
-   └ ᴛᴇᴍᴘ
-๏ <b>ᴄʟᴇᴀɴ ᴀʟʟ</b> – ᴄʟᴇᴀɴs ᴇᴠᴇʀʏᴛʜɪɴɢ ɪɴ ᴏɴᴇ ɢᴏ
-❖ ғᴏʟᴅᴇʀ sᴛʀᴜᴄᴛᴜʀᴇ, sɪᴢᴇ & ғɪʟᴇ ᴄᴏᴜɴᴛ ɪɴᴄʟᴜᴅᴇᴅ
-❖ ғᴜʟʟ ᴅɪsᴋ sᴛᴀᴛs ᴀʟsᴏ sʜᴏᴡɴ
+<b>File manager — paid :</b>
+<b>๏ soon</b> – it will be public in the next update
 
-<b>❖ ғɪʟᴇ ᴍᴀɴᴀɢᴇʀ — ᴘᴀɪᴅ :</b>
-<b>๏ sᴏᴏɴ</b> – ɪᴛ ᴡɪʟʟ ʙᴇ ᴘᴜʙʟɪᴄ ɪɴ ᴛʜᴇ ɴᴇxᴛ ᴜᴘᴅᴀᴛᴇ
+<b>These tools are of no use :</b>
+<b>๏ /logs -</b> get logs of the bot
+<b>๏ /logger [enable/disable] -</b> bot will start logging the activities happen on bot
+<b>๏ /maintenance [enable/disable] -</b> enable or disable the maintenance mode of your bot
 
-<b>❖ ᴛʜᴇsᴇ ᴛᴏᴏʟs ᴀʀᴇ ᴏғ ɴᴏ ᴜsᴇ — ғʀᴇᴇ :</b>
-<b>๏ /logs -</b> ɢᴇᴛ ʟᴏɢs ᴏғ ᴛʜᴇ ʙᴏᴛ  
-<b>๏ /logger [ᴇɴᴀʙʟᴇ/ᴅɪsᴀʙʟᴇ] -</b> ʙᴏᴛ ᴡɪʟʟ sᴛᴀʀᴛ ʟᴏɢɢɪɴɢ ᴛʜᴇ ᴀᴄᴛɪᴠɪᴛɪᴇs ʜᴀᴘᴘᴇɴ ᴏɴ ʙᴏᴛ  
-<b>๏ /maintenance [ᴇɴᴀʙʟᴇ/ᴅɪsᴀʙʟᴇ] -</b> ᴇɴᴀʙʟᴇ ᴏʀ ᴅɪsᴀʙʟᴇ ᴛʜᴇ ᴍᴀɪɴᴛᴇɴᴀɴᴄᴇ ᴍᴏᴅᴇ ᴏғ ʏᴏᴜʀ ʙᴏᴛ  
-
-<b>❖ ᴍᴀɴᴀɢᴇ ʏᴏᴜʀ sᴜᴅᴏ ʟɪsᴛ — ᴘᴀɪᴅ - ғʀᴇᴇ :</b>
-<b>๏ /sudo -</b> ᴀᴅᴅ ᴀ sᴜᴅᴏ ᴜsᴇʀ  
-<b>๏ /rmsudo -</b> ʀᴇᴍᴏᴠᴇ sᴜᴅᴏ ᴜsᴇʀ  
-<b>๏ /sudolist -</b> ᴄʜᴇᴄᴋ sᴜᴅᴏʟɪsᴛ
-<b>๏ /delallsudo -</b> ʀᴇᴍᴏᴠᴇ ᴀʟʟ sᴜᴅᴏ ᴜsᴇʀ's — ᴘᴀɪᴅ
+<b>Manage your sudo list :</b>
+<b>๏ /sudo -</b> add a sudo user
+<b>๏ /rmsudo -</b> remove sudo user
+<b>๏ /sudolist -</b> check sudolist
 """
 
-HELP_8 = """<b><u>❖ ʜᴇʀᴇ ɪs ᴛʜᴇ ʜᴇʟᴘ ғᴏʀ ᴀᴄᴛɪᴠᴇ ᴠɪᴅᴇᴏᴄʜᴀᴛs ᴍᴏᴅᴜʟᴇ :</b></u>
+HELP_8 = """<b><u>Here is the help for active videochats module :</b></u>
 
-<b><u>❖ ᴀᴄᴛɪᴠᴇ ᴠɪᴅᴇᴏᴄʜᴀᴛs :</b></u>
+<b><u>Active videochats :</b></u>
 
-<b>๏ /activevoice -</b> sʜᴏᴡs ᴛʜᴇ ʟɪsᴛ ᴏғ ᴀᴄᴛɪᴠᴇ ᴠᴏɪᴄᴇᴄʜᴀᴛs ᴏɴ ᴛʜᴇ ʙᴏᴛ.
-<b>๏ /activevideo -</b> sʜᴏᴡs ᴛʜᴇ ʟɪsᴛ ᴏғ ᴀᴄᴛɪᴠᴇ ᴠɪᴅᴇᴏᴄʜᴀᴛs ᴏɴ ʙᴏᴛ.
-<b>๏ /autoend [ᴇɴᴀʙʟᴇ|ᴅɪsᴀʙʟᴇ] -</b> ᴇɴᴀʙʟᴇ sᴛʀᴇᴀᴍ ᴀᴜᴛᴏ ᴇɴᴅ ɪғ ɴᴏ ᴏɴᴇ ɪs ʟɪsᴛᴇɴɪɴɢ.
+<b>๏ /activevoice -</b> shows the list of active voicechats on the bot.
+<b>๏ /activevideo -</b> shows the list of active videochats on bot.
+<b>๏ /autoend [enable|disable] -</b> enable stream auto end if no one is listening.
 """
 
-HELP_9 = """<b><u>❖ ʜᴇʀᴇ ɪs ᴛʜᴇ ʜᴇʟᴘ ғᴏʀ sᴛᴀʀᴛ ᴍᴏᴅᴜʟᴇ :</b></u>
+HELP_9 = """<b><u>Here is the help for start module :</b></u>
 
-<b><u>❖ ɢᴇᴛ sᴛᴀʀᴛᴇᴅ ᴡɪᴛʜ ʙᴏᴛ</b></u>
+<b><u>Get started with bot</b></u>
 
-<b>๏ /start -</b> sᴛᴀʀᴛs ᴛʜᴇ ᴍᴜsɪᴄ ʙᴏᴛ.
-<b>๏ /help -</b> ɢᴇᴛ ʜᴇʟᴘ ᴍᴇɴᴜ ᴡɪᴛʜ ᴇxᴘʟᴀɴᴀᴛɪᴏɴ ᴏғ ᴄᴏᴍᴍᴀɴᴅs.
-<b>๏ /reboot -</b> ʀᴇʙᴏᴏᴛs ᴛʜᴇ ʙᴏᴛ ғᴏʀ ʏᴏᴜʀ ᴄʜᴀᴛ.
-<b>๏ /settings -</b> sʜᴏᴡs ᴛʜᴇ ɢʀᴏᴜᴘ sᴇᴛᴛɪɴɢs ᴡɪᴛʜ ᴀɴ ɪɴᴛᴇʀᴀᴄᴛɪᴠᴇ ɪɴʟɪɴᴇ ᴍᴇɴᴜ.
+<b>๏ /start -</b> starts the music bot.
+<b>๏ /help -</b> get help menu with explanation of commands.
+<b>๏ /reboot -</b> reboots the bot for your chat.
+<b>๏ /settings -</b> shows the group settings with an interactive inline menu.
 """

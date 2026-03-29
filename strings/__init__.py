@@ -1,3 +1,8 @@
+# Copyright (c) 2026 Vibe-Bots
+# Open-sourced under MIT terms.
+# Included within AnonMusic framework.
+
+
 import os
 from typing import List
 
