@@ -1,128 +1,158 @@
-# Copyright (c) 2026 Vibe-Bots
-# Open-sourced under MIT terms.
-# Included within AnonMusic framework.
-
-
 import os
 import re
 import random
-
 import aiofiles
 import aiohttp
 from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont
 from py_yt import VideosSearch
-
 from config import YOUTUBE_IMG_URL
+from AnonMusic import app
 
+CACHE_DIR = "cache"
+os.makedirs(CACHE_DIR, exist_ok=True)
 
-def truncate(text, max_len=30):
-    words = text.split()
-    lines = ["", ""]
-    i = 0
-    for word in words:
-        if len(lines[i]) + len(word) + 1 <= max_len:
-            lines[i] += (" " if lines[i] else "") + word
-        elif i == 0:
-            i = 1
+DUAL_TONES = [
+    ((20, 20, 20), (240, 240, 240)),
+    ((25, 30, 45), (250, 250, 250)),
+    ((15, 40, 65), (230, 230, 230)),
+    ((55, 10, 80), (255, 245, 255))
+]
 
-    return lines
-
-def random_color():
-    return tuple(random.randint(0, 255) for _ in range(3))
-
-def circular_crop(img, size, border, color, scale=1.5):
-    inner = size - 2 * border
-    crop = int(size * scale)
-    w, h = img.size
-    img = img.crop((w//2-crop//2, h//2-crop//2, w//2+crop//2, h//2+crop//2))
-    img = img.resize((inner, inner), Image.LANCZOS)
-
-    out = Image.new("RGBA", (size, size), color)
-    mask = Image.new("L", (inner, inner), 0)
-    ImageDraw.Draw(mask).ellipse((0, 0, inner, inner), 255)
-    out.paste(img, (border, border), mask)
-
-    outer = Image.new("L", (size, size), 0)
-    ImageDraw.Draw(outer).ellipse((0, 0, size, size), 255)
-    out.putalpha(outer)
-    return out
-
-def draw_text(draw, pos, text, font, fill):
-    x, y = pos
-    draw.text((x+2, y+2), text, font=font, fill="black")
-    draw.text(pos, text, font=font, fill=fill)
-
-def gen_gradient(size, start, end):
-    base = Image.new("RGBA", size, start)
-    top = Image.new("RGBA", size, end)
-    mask = Image.linear_gradient("L").resize(size)
-    base.paste(top, (0, 0), mask)
-    return base
-
-
-async def gen_thumb(videoid: str, thumb_size=(1280, 720)):
-    path = f"cache/{videoid}.png"
-    if os.path.isfile(path):
-        return path
+def trim_to_width(text: str, font: ImageFont.FreeTypeFont, max_w: int) -> str:
+    ellipsis = "…"
     try:
-        url = f"https://www.youtube.com/watch?v={videoid}"
-        results = VideosSearch(url, limit=1, with_live=False)
-        data = (await results.next())["result"][0]
-        title = re.sub(r"\W+", " ", data.get("title", "Unsupported Title")).title()
-        duration = data.get("duration") or "00:00"
+        if font.getlength(text) <= max_w:
+            return text
+        for i in range(len(text)-1, 0, -1):
+            if font.getlength(text[:i] + ellipsis) <= max_w:
+                return text[:i] + ellipsis
+    except:
+        return text[:max_w//10] + "…" if len(text) > max_w//10 else text
+    return ellipsis
+
+
+async def get_thumb(videoid: str, player_username: str = None) -> str:
+    if player_username is None:
+        player_username = app.username
+
+    cache_path = os.path.join(CACHE_DIR, f"{videoid}_hexagon.png")
+    if os.path.exists(cache_path):
+        return cache_path
+
+
+    try:
+        results = VideosSearch(f"https://www.youtube.com/watch?v={videoid}", limit=1)
+        search = await results.next()
+        data = search.get("result", [])[0]
+        title = re.sub(r"\W+", " ", data.get("title", "Unknown Title")).title()
+        thumbnail = data.get("thumbnails", [{}])[0].get("url", YOUTUBE_IMG_URL)
+        duration = data.get("duration")
         views = data.get("viewCount", {}).get("short", "Unknown Views")
-        channel = data.get("channel", {}).get("name", "Unknown Channel")
-        thumb_url = data["thumbnails"][0]["url"].split("?")[0]
-        
+    except:
+        title, thumbnail, duration, views = "Unknown", YOUTUBE_IMG_URL, None, "Unknown"
+
+    is_live = not duration or str(duration).lower() in {"live", "live now", ""}
+    duration_text = "Live" if is_live else duration or "Unknown"
+
+    thumb_path = os.path.join(CACHE_DIR, f"thumb_{videoid}.png")
+    try:
         async with aiohttp.ClientSession() as session:
-            async with session.get(thumb_url) as resp:
-                content = await resp.read()
-
-        temp_path = f"cache/thumb_{videoid}.png"
-        async with aiofiles.open(temp_path, "wb") as f:
-            await f.write(content)
-
-        base_img = Image.open(temp_path).convert("RGBA")
-        base_img.thumbnail(thumb_size, Image.Resampling.LANCZOS)
-
-        bg = base_img.filter(ImageFilter.BoxBlur(20))
-        bg = ImageEnhance.Brightness(bg).enhance(0.6)
-        grad = gen_gradient(thumb_size, random_color(), random_color())
-        bg = Image.blend(bg, grad, 0.2)
-
-        draw = ImageDraw.Draw(bg)
-        font_small = ImageFont.truetype("AnonMusic/assets/font2.ttf", 30)
-        font_title = ImageFont.truetype("AnonMusic/assets/font3.ttf", 45)
-
-        circle = circular_crop(base_img, 400, 20, random_color())
-        circle.show()
-        bg.paste(circle, (120, 160), circle)
-
-        x, y = 565, 380
-        t1, t2 = truncate(title)
-
-        draw_text(draw, (x, 180), t1, font_title, "white")
-        draw_text(draw, (x, 230), t2, font_title, "white")
-        draw_text(draw, (x, 320), f"{channel} | {views[:23]}", font_small, "white")
-
-        pct = random.uniform(0.15, 0.85)
-        color_len = int(580 * pct)
-        color = random_color()
-
-        draw.line((x, y, x + color_len, y), fill=color, width=9)
-        draw.line((x + color_len, y, x + 580, y), fill="white", width=8)
-        draw.ellipse((x + color_len - 10, y - 10, x + color_len + 10, y + 10), fill=color)
-
-        draw_text(draw, (x, 400), "00:00", font_small, "white")
-        draw_text(draw, (1080, 400), duration, font_small, "white")
-
-        icons = Image.open("AnonMusic/assets/play_icons.png").convert("RGBA")
-        bg.paste(icons, (x, 450), icons)
-        bg.save(path)
-
-        os.remove(temp_path)
-        return path
-
-    except Exception as ex:
-        print(ex)
+            async with session.get(thumbnail) as r:
+                if r.status == 200:
+                    async with aiofiles.open(thumb_path, "wb") as f:
+                        await f.write(await r.read())
+    except:
         return YOUTUBE_IMG_URL
+
+    
+    bg = Image.open(thumb_path).resize((1280, 720)).convert("RGB")
+    bg = bg.filter(ImageFilter.GaussianBlur(30)).convert("RGBA")
+    overlay = Image.new("RGBA", (1280, 720), (255, 255, 255, 40))
+    bg = Image.alpha_composite(bg, overlay)
+
+    thumb = Image.open(thumb_path).resize((520, 520)).convert("RGBA")
+
+    hex_points = [
+        (260, 0),
+        (520, 130),
+        (520, 390),
+        (260, 520),
+        (0, 390),
+        (0, 130)
+    ]
+
+    mask = Image.new("L", (520, 520), 0)
+    draw_mask = ImageDraw.Draw(mask)
+    draw_mask.polygon(hex_points, fill=255)
+
+    hex_thumb = Image.new("RGBA", (520, 520), (0, 0, 0, 0))
+    hex_thumb.paste(thumb, (0, 0), mask)
+
+    border_img = Image.new("RGBA", (600, 600), (0, 0, 0, 0))
+    d = ImageDraw.Draw(border_img)
+    offset = 40
+
+    border_hex = [(x + offset, y + offset) for x, y in hex_points]
+
+    d.polygon(border_hex, outline=(90, 0, 60, 255), width=26)
+
+    d.polygon(border_hex, outline=(255, 100, 200, 180), width=10)
+
+    d.polygon(border_hex, outline=(255, 40, 150, 255), width=16)
+
+    bg.paste(border_img, (60, 60), border_img)
+    bg.paste(hex_thumb, (100, 100), hex_thumb)
+
+    draw = ImageDraw.Draw(bg)
+
+    try:
+        title_font = ImageFont.truetype("AnonMusic/assets/font.ttf", 44)
+        meta_font = ImageFont.truetype("AnonMusic/assets/font.ttf", 26)
+        tag_font = ImageFont.truetype("AnonMusic/assets/font2.ttf", 28)
+    except:
+        title_font = meta_font = tag_font = ImageFont.load_default()
+
+    title_x = 700
+    title_y = 180
+    title_text = trim_to_width(title, title_font, 480)
+    draw.text((title_x, title_y), title_text, fill=(0, 0, 0), font=title_font)
+
+    meta = (
+        f"YouTube | {views}\n"
+        f"Duration | {duration_text}\n"
+        f"Player | @{player_username}\n"
+    )
+    draw.multiline_text(
+        (title_x, title_y + 90),
+        meta,
+        fill=(0, 0, 0),
+        spacing=10,
+        font=meta_font
+    )
+    
+    bar_y = title_y + 240
+    bar_w = 390
+
+    draw.rounded_rectangle(
+        (title_x, bar_y, title_x + bar_w, bar_y + 14),
+        8,
+        fill=(255, 255, 255, 80)
+    )
+
+    draw.rounded_rectangle(
+        (title_x, bar_y, title_x + bar_w // 2, bar_y + 14),
+        8,
+        fill=(0, 0, 0)
+    )
+
+    brand = "DEV :- kirti bots"
+    w = tag_font.getlength(brand)
+    draw.text((1280 - w - 50, 680), brand, fill=(0, 0, 0), font=tag_font)
+
+    try:
+        os.remove(thumb_path)
+    except:
+        pass
+
+    bg.save(cache_path)
+    return cache_path
