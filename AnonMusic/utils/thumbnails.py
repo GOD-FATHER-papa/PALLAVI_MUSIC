@@ -7,6 +7,7 @@ from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont
 from py_yt import VideosSearch
 from config import YOUTUBE_IMG_URL
 from AnonMusic import app
+from AnonMusic.utils.thumbnails import gen_thumb
 
 CACHE_DIR = "cache"
 os.makedirs(CACHE_DIR, exist_ok=True)
