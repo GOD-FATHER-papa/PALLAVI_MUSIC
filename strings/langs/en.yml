@@ -174,8 +174,8 @@ queue_6 : "<b>Duration :</b> unknown duration stream\n\nClick on button below to
 queue_7 : "\nClick on button below to get whole queued list."
 queue_8 : "<b>🎵 {0} player</b>\n\n<b>Streaming :</b> {1}\n\n<b>Stream type :</b> {2}\n<b>Requested by :</b> {3}\n{4}"
 
-stream_1 : "<b>Stream has begun. Enjoy the music!</b>\n\n<b>Title :</b> <a href={0}>{1}</a>\n<b>Duration :</b> {2} minutes\n<b>Requested by :</b> {3}"
-stream_2 : "<b>Stream has begun. Enjoy the music!</b>\n\n<b>Stream type :</b> live stream [url]\n<b>Requested by :</b> {0}"
+stream_1 : "<b>➻ sᴛʀᴇᴀᴍ ʜᴀs ʙᴇɢᴜɴ. ᴇɴᴊᴏʏ ᴛʜᴇ ᴍᴜsɪᴄ !</b>\n\n<b>❄ ᴛɪᴛʟᴇ : </b> <a href={0}>{1}</a>\n<b>⏱ ᴛɪᴍᴇ : </b> {2} ᴍɪɴᴜᴛᴇs\n<b>🥀 ʙʏ : </b> {3}"
+stream_2 : "<b>➻ sᴛʀᴇᴀᴍ ʜᴀs ʙᴇɢᴜɴ. ᴇɴᴊᴏʏ ᴛʜᴇ ᴍᴜsɪᴄ !</b>\n\n<b>‣ Sᴛʀᴇᴀᴍ ᴛʏᴘᴇ :</b> ʟɪᴠᴇ sᴛʀᴇᴀᴍ [ᴜʀʟ]\n<b>‣ Rᴇǫᴜᴇsᴛᴇᴅ ʙʏ :</b> {0}"
 
 CLOSE_BUTTON  : "ᴄʟᴏsᴇ"
 BACK_BUTTON : "ʙᴀᴄᴋ"
@@ -186,10 +186,10 @@ S_B_3 : "⊚ ᴧᴅᴅ ᴍᴇ ᴛᴏ ʏᴏυʀ ᴄʜᴧᴛ ⊚"
 S_B_4 : "ʜᴇʟᴘ ᴧɴᴅ ᴄᴏᴍᴍᴧɴᴅs"
 S_B_5 : "ᴏᴡɴᴇʀ"
 S_B_6 : "υᴘᴅᴧᴛᴇs"
-S_B_7 : "ʀᴇᴘᴏ"
+S_B_7 : "ᴜᴘᴅᴀᴛᴇs"
 S_B_8 : "ʏᴏυᴛυʙᴇ"
 S_B_9 : "sυᴘᴘᴏʀᴛ"
-S_B_10: "🌐 Source Code"
+S_B_10: "ʀᴇᴘᴏ"
 
 
 H_B_1 : "ᴀᴅᴍɪɴ"
