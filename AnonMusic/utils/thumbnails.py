@@ -74,7 +74,7 @@ def load_font(path, size):
 # ==============================
 # MAIN FUNCTION
 # ==============================
-async def gen_thumb(videoid: str, thumb_size=(1280, 720)):
+async def gen_thumb(videoid: str, user_name: str = "Unknown", thumb_size=(1280, 720)):
     path = f"cache/{videoid}.png"
 
     if os.path.exists(path):
@@ -90,7 +90,6 @@ async def gen_thumb(videoid: str, thumb_size=(1280, 720)):
         title = re.sub(r"\W+", " ", data.get("title", "Unknown")).title()
         duration = data.get("duration") or "00:00"
         views = data.get("viewCount", {}).get("short", "0 Views")
-        channel = data.get("channel", {}).get("name", "Unknown")
 
         thumb_url = data["thumbnails"][0]["url"].split("?")[0]
 
@@ -107,9 +106,7 @@ async def gen_thumb(videoid: str, thumb_size=(1280, 720)):
         base = Image.open(temp_path).convert("RGBA")
         base.thumbnail(thumb_size, Image.Resampling.LANCZOS)
 
-        # ==============================
         # BACKGROUND
-        # ==============================
         bg = base.filter(ImageFilter.GaussianBlur(30))
         bg = ImageEnhance.Brightness(bg).enhance(0.4)
 
@@ -124,27 +121,28 @@ async def gen_thumb(videoid: str, thumb_size=(1280, 720)):
         font_small = load_font("AnonMusic/assets/font2.ttf", 30)
         font_watermark = load_font("AnonMusic/assets/font2.ttf", 24)
 
-        # ==============================
-        # CIRCLE IMAGE
-        # ==============================
+        # Circle image
         circle = circular_crop(base, 420, 10)
         bg.paste(circle, (120, 150), circle)
 
-        # ==============================
-        # TEXT
-        # ==============================
+        # TITLE
         x = 580
         t1, t2 = truncate(title)
 
         draw_text(draw, (x, 170), t1, font_title, "white")
         draw_text(draw, (x, 240), t2, font_title, "white")
 
-        draw_text(draw, (x, 330), f"{channel}", font_small, "cyan")
-        draw_text(draw, (x, 370), f"{views}", font_small, "orange")
+        # INFO BLOCK
+        info_text = (
+            f"YouTube | {views}\n"
+            f"Duration | {duration}\n"
+            f"Player | @{user_name}"
+        )
 
-        # ==============================
+        draw.multiline_text((x+2, 332), info_text, font=font_small, fill=(0,0,0,150), spacing=8)
+        draw.multiline_text((x, 330), info_text, font=font_small, fill=(180,255,0), spacing=8)
+
         # PROGRESS BAR
-        # ==============================
         y = 440
         pct = random.uniform(0.3, 0.9)
         length = int(600 * pct)
@@ -153,23 +151,16 @@ async def gen_thumb(videoid: str, thumb_size=(1280, 720)):
 
         draw.line((x, y, x+600, y), fill=(80,80,80), width=8)
         draw.line((x, y, x+length, y), fill=color, width=10)
-
         draw.ellipse((x+length-8, y-8, x+length+8, y+8), fill=color)
 
         # Time
         draw_text(draw, (x, 470), "00:00", font_small, "white")
         draw_text(draw, (x+520, 470), duration, font_small, "white")
 
-        # ==============================
         # WATERMARKS
-        # ==============================
+        draw.text((22, 682), "GitHub @kirtiBots", font=font_watermark, fill=(0,0,0,150))
+        draw.text((20, 680), "GitHub @kirtiBots", font=font_watermark, fill=(0,255,120))
 
-        # LEFT (Green)
-        left_text = "GitHub @kirtiBots"
-        draw.text((22, 682), left_text, font=font_watermark, fill=(0,0,0,150))  # shadow
-        draw.text((20, 680), left_text, font=font_watermark, fill=(0,255,120))  # green
-
-        # RIGHT (yellow)
         right_text = "Powered by Kriti-Bots"
         bbox = draw.textbbox((0,0), right_text, font=font_watermark)
         rw = bbox[2]
@@ -177,15 +168,27 @@ async def gen_thumb(videoid: str, thumb_size=(1280, 720)):
         rx = thumb_size[0] - rw - 20
         ry = 680
 
-        draw.text((rx+2, ry+2), right_text, font=font_watermark, fill=(0,0,0,150))  # shadow
-        draw.text((rx, ry), right_text, font=font_watermark, fill=(180,255,0))      # neon
+        draw.text((rx+2, ry+2), right_text, font=font_watermark, fill=(0,0,0,150))
+        draw.text((rx, ry), right_text, font=font_watermark, fill=(180,255,0))
 
         # ==============================
-        # SAVE
+        # ✅ WHITE BORDER (NEW)
         # ==============================
-        bg.save(path)
+        border_size = 8
+        final = Image.new(
+            "RGB",
+            (thumb_size[0] + border_size*2, thumb_size[1] + border_size*2),
+            "white"
+        )
+        final.paste(bg, (border_size, border_size))
+
+        final.save(path)
         return path
 
     except Exception as e:
         print("Thumbnail Error:", e)
         return YOUTUBE_IMG_URL
+
+    finally:
+        if os.path.exists(temp_path):
+            os.remove(temp_path)
