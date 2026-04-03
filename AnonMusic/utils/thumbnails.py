@@ -130,9 +130,9 @@ async def gen_thumb(videoid: str, thumb_size=(1280, 720)):
         x = 560
         t1, t2 = truncate(title)
 
-        draw_text(draw, (x, 170), t1, font_title, "white")
-        draw_text(draw, (x, 230), t2, font_title, "white")
-        draw_text(draw, (x, 310), f"{channel} • {views}", font_small, "white")
+        draw_text(draw, (x, 170), t1, font_title, "green")
+        draw_text(draw, (x, 230), t2, font_title, "yellow")
+        draw_text(draw, (x, 310), f"{channel} • {views}", font_small, "red")
 
         # Progress Bar
         y = 380
@@ -142,12 +142,12 @@ async def gen_thumb(videoid: str, thumb_size=(1280, 720)):
         bar_color = random_color()
 
         draw.line((x, y, x + length, y), fill=bar_color, width=10)
-        draw.line((x + length, y, x + 580, y), fill="white", width=8)
+        draw.line((x + length, y, x + 580, y), fill="green", width=8)
         draw.ellipse((x + length - 10, y - 10, x + length + 10, y + 10), fill=bar_color)
 
         # Time
-        draw_text(draw, (x, 400), "00:00", font_small, "white")
-        draw_text(draw, (1080, 400), duration, font_small, "white")
+        draw_text(draw, (x, 400), "00:00", font_small, "green")
+        draw_text(draw, (1080, 400), duration, font_small, "yellow")
 
         # Icons
         try:
@@ -161,7 +161,7 @@ async def gen_thumb(videoid: str, thumb_size=(1280, 720)):
         # ==============================
 
         # LEFT
-        left_text = "Powered by kirti-Bots"
+        left_text = "GitHub @kirtiBots"
         bbox1 = draw.textbbox((0, 0), left_text, font=font_watermark)
         lw = bbox1[2] - bbox1[0]
         lh = bbox1[3] - bbox1[1]
