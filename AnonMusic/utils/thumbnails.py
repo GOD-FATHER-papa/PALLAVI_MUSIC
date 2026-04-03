@@ -132,17 +132,36 @@ async def gen_thumb(videoid: str, user_name: str = "Unknown", thumb_size=(1280, 
         draw_text(draw, (x, 170), t1, font_title, "white")
         draw_text(draw, (x, 240), t2, font_title, "white")
 
-        # INFO BLOCK
+        # ==============================
+        # 🔥 INFO BLOCK (NEW)
+        # ==============================
         info_text = (
             f"YouTube | {views}\n"
             f"Duration | {duration}\n"
-            f"Player | @{Kritiprobot}"
+            f"Player | @{user_name}"
         )
 
-        draw.multiline_text((x+2, 332), info_text, font=font_small, fill=(0,0,0,150), spacing=8)
-        draw.multiline_text((x, 330), info_text, font=font_small, fill=(180,255,0), spacing=8)
+        # shadow
+        draw.multiline_text(
+            (x+2, 332),
+            info_text,
+            font=font_small,
+            fill=(0,0,0,150),
+            spacing=8
+        )
 
+        # main text
+        draw.multiline_text(
+            (x, 330),
+            info_text,
+            font=font_small,
+            fill=(180,255,0),  # yellow-green
+            spacing=8
+        )
+
+        # ==============================
         # PROGRESS BAR
+        # ==============================
         y = 440
         pct = random.uniform(0.3, 0.9)
         length = int(600 * pct)
@@ -157,10 +176,16 @@ async def gen_thumb(videoid: str, user_name: str = "Unknown", thumb_size=(1280, 
         draw_text(draw, (x, 470), "00:00", font_small, "white")
         draw_text(draw, (x+520, 470), duration, font_small, "white")
 
+        # ==============================
         # WATERMARKS
-        draw.text((22, 682), "GitHub @kirtiBots", font=font_watermark, fill=(0,0,0,150))
-        draw.text((20, 680), "GitHub @kirtiBots", font=font_watermark, fill=(0,255,120))
+        # ==============================
 
+        # LEFT (green)
+        left_text = "GitHub @kirtiBots"
+        draw.text((22, 682), left_text, font=font_watermark, fill=(0,0,0,150))
+        draw.text((20, 680), left_text, font=font_watermark, fill=(0,255,120))
+
+        # RIGHT (yellow-green)
         right_text = "Powered by Kriti-Bots"
         bbox = draw.textbbox((0,0), right_text, font=font_watermark)
         rw = bbox[2]
@@ -171,18 +196,8 @@ async def gen_thumb(videoid: str, user_name: str = "Unknown", thumb_size=(1280, 
         draw.text((rx+2, ry+2), right_text, font=font_watermark, fill=(0,0,0,150))
         draw.text((rx, ry), right_text, font=font_watermark, fill=(180,255,0))
 
-        # ==============================
-        # ✅ WHITE BORDER (NEW)
-        # ==============================
-        border_size = 8
-        final = Image.new(
-            "RGB",
-            (thumb_size[0] + border_size*2, thumb_size[1] + border_size*2),
-            "white"
-        )
-        final.paste(bg, (border_size, border_size))
-
-        final.save(path)
+        # SAVE
+        bg.save(path)
         return path
 
     except Exception as e:
