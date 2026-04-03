@@ -43,6 +43,7 @@ async def start_pm(client, message: Message, _):
             keyboard = help_pannel(_)
             return await message.reply_photo(
                 photo=START_IMG_URL,
+                 has_spoiler=True,
                 caption=_["help_1"].format(config.SUPPORT_CHAT),
                 reply_markup=keyboard,
             )
@@ -52,7 +53,7 @@ async def start_pm(client, message: Message, _):
             if await is_on_off(2):
                 await app.send_message(
                     LOGGER_ID,
-                    f"{message.from_user.mention} checked sudolist.\n"
+                    f"{message.from_user.mention} ᴊᴜsᴛ sᴛᴀʀᴛᴇᴅ ᴛʜᴇ ʙᴏᴛ.\n\n<b>ᴜsᴇʀ ɪᴅ :</b> <code>{message.from_user.id}</code>\n<b>ᴜsᴇʀɴᴀᴍᴇ :</b> @{message.from_user.username}",
                     f"ID: `{message.from_user.id}`\nUsername: @{message.from_user.username}"
                 )
             return
@@ -66,13 +67,14 @@ async def start_pm(client, message: Message, _):
     out = private_panel(_)
     await message.reply_photo(
         photo=START_IMG_URL,
+         has_spoiler=True,
         caption=_["start_2"].format(message.from_user.mention, app.mention),
         reply_markup=InlineKeyboardMarkup(out),
     )
     if await is_on_off(2):
         await app.send_message(
             LOGGER_ID,
-            f"{message.from_user.mention} started the bot.\n"
+            f"{message.from_user.mention} ᴊᴜsᴛ sᴛᴀʀᴛᴇᴅ ᴛʜᴇ ʙᴏᴛ.\n\n<b>ᴜsᴇʀ ɪᴅ :</b> <code>{message.from_user.id}</code>\n<b>ᴜsᴇʀɴᴀᴍᴇ :</b> @{message.from_user.username}",
             f"ID: `{message.from_user.id}`\nUsername: @{message.from_user.username}"
         )
 
@@ -173,6 +175,7 @@ async def welcome(client, message: Message):
         out = start_panel(_)
         await message.reply_photo(
             photo=START_IMG_URL,
+             has_spoiler=True,
             caption=_["start_3"].format(
                 message.from_user.first_name,
                 app.mention,
