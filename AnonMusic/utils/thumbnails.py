@@ -136,7 +136,7 @@ async def gen_thumb(videoid: str, user_name: str = "Unknown", thumb_size=(1280, 
         info_text = (
             f"YouTube | {views}\n"
             f"Duration | {duration}\n"
-            f"Player | @{user_name}"
+            f"Player | @{Kritiprobot}"
         )
 
         draw.multiline_text((x+2, 332), info_text, font=font_small, fill=(0,0,0,150), spacing=8)
