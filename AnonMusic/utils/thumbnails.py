@@ -11,14 +11,13 @@ from py_yt import VideosSearch
 
 from config import YOUTUBE_IMG_URL
 
-# Ensure cache dir exists
 os.makedirs("cache", exist_ok=True)
 
 
 # ==============================
-# TEXT HANDLING
+# TEXT
 # ==============================
-def truncate(text, max_len=30):
+def truncate(text, max_len=32):
     words = text.split()
     lines = ["", ""]
     i = 0
@@ -29,20 +28,21 @@ def truncate(text, max_len=30):
         elif i == 0:
             i = 1
             lines[i] += word
+        else:
+            break
 
     return lines
 
 
 def random_color():
-    return tuple(random.randint(100, 255) for _ in range(3))
+    return tuple(random.randint(120, 255) for _ in range(3))
 
 
 # ==============================
 # IMAGE HELPERS
 # ==============================
-def circular_crop(img, size, border, color):
+def circular_crop(img, size, border):
     inner = size - 2 * border
-
     img = img.resize((inner, inner), Image.LANCZOS)
 
     mask = Image.new("L", (inner, inner), 0)
@@ -56,16 +56,12 @@ def circular_crop(img, size, border, color):
 
 def draw_text(draw, pos, text, font, fill):
     x, y = pos
-    draw.text((x + 2, y + 2), text, font=font, fill="black")
+    draw.text((x+3, y+3), text, font=font, fill=(0,0,0,180))
     draw.text((x, y), text, font=font, fill=fill)
 
 
-def gen_gradient(size, start, end):
-    base = Image.new("RGBA", size, start)
-    top = Image.new("RGBA", size, end)
-    mask = Image.linear_gradient("L").resize(size)
-    base.paste(top, (0, 0), mask)
-    return base
+def gen_gradient(size):
+    return Image.linear_gradient("L").resize(size)
 
 
 def load_font(path, size):
@@ -76,13 +72,15 @@ def load_font(path, size):
 
 
 # ==============================
-# MAIN THUMB FUNCTION
+# MAIN FUNCTION
 # ==============================
 async def gen_thumb(videoid: str, thumb_size=(1280, 720)):
     path = f"cache/{videoid}.png"
 
-    if os.path.isfile(path):
+    if os.path.exists(path):
         return path
+
+    temp_path = f"cache/temp_{videoid}.png"
 
     try:
         url = f"https://www.youtube.com/watch?v={videoid}"
@@ -91,103 +89,101 @@ async def gen_thumb(videoid: str, thumb_size=(1280, 720)):
 
         title = re.sub(r"\W+", " ", data.get("title", "Unknown")).title()
         duration = data.get("duration") or "00:00"
-        views = data.get("viewCount", {}).get("short", "Unknown Views")
-        channel = data.get("channel", {}).get("name", "Unknown Channel")
+        views = data.get("viewCount", {}).get("short", "0 Views")
+        channel = data.get("channel", {}).get("name", "Unknown")
 
         thumb_url = data["thumbnails"][0]["url"].split("?")[0]
 
         # Download thumbnail
         async with aiohttp.ClientSession() as session:
             async with session.get(thumb_url) as resp:
+                if resp.status != 200:
+                    return YOUTUBE_IMG_URL
                 content = await resp.read()
 
-        temp_path = f"cache/temp_{videoid}.png"
         async with aiofiles.open(temp_path, "wb") as f:
             await f.write(content)
 
-        base_img = Image.open(temp_path).convert("RGBA")
-        base_img.thumbnail(thumb_size, Image.Resampling.LANCZOS)
+        base = Image.open(temp_path).convert("RGBA")
+        base.thumbnail(thumb_size, Image.Resampling.LANCZOS)
 
-        # Background
-        bg = base_img.filter(ImageFilter.GaussianBlur(25))
-        bg = ImageEnhance.Brightness(bg).enhance(0.5)
+        # ==============================
+        # BACKGROUND
+        # ==============================
+        bg = base.filter(ImageFilter.GaussianBlur(30))
+        bg = ImageEnhance.Brightness(bg).enhance(0.4)
 
-        gradient = gen_gradient(thumb_size, random_color(), random_color())
-        bg = Image.blend(bg, gradient, 0.25)
+        gradient = Image.new("RGBA", thumb_size, random_color())
+        mask = gen_gradient(thumb_size)
+        bg.paste(gradient, (0, 0), mask)
 
         draw = ImageDraw.Draw(bg)
 
         # Fonts
-        font_small = load_font("AnonMusic/assets/font2.ttf", 28)
-        font_title = load_font("AnonMusic/assets/font3.ttf", 48)
+        font_title = load_font("AnonMusic/assets/font3.ttf", 52)
+        font_small = load_font("AnonMusic/assets/font2.ttf", 30)
         font_watermark = load_font("AnonMusic/assets/font2.ttf", 24)
 
-        # Circle Image
-        circle = circular_crop(base_img, 400, 10, random_color())
-        bg.paste(circle, (120, 160), circle)
+        # ==============================
+        # CIRCLE IMAGE
+        # ==============================
+        circle = circular_crop(base, 420, 10)
+        bg.paste(circle, (120, 150), circle)
 
-        # Text
-        x = 560
+        # ==============================
+        # TEXT
+        # ==============================
+        x = 580
         t1, t2 = truncate(title)
 
         draw_text(draw, (x, 170), t1, font_title, "white")
-        draw_text(draw, (x, 230), t2, font_title, "white")
-        draw_text(draw, (x, 310), f"{channel} • {views}", font_small, "red")
+        draw_text(draw, (x, 240), t2, font_title, "white")
 
-        # Progress Bar
-        y = 380
-        pct = random.uniform(0.2, 0.85)
-        length = int(580 * pct)
+        draw_text(draw, (x, 330), f"{channel}", font_small, "cyan")
+        draw_text(draw, (x, 370), f"{views}", font_small, "orange")
 
-        bar_color = random_color()
+        # ==============================
+        # PROGRESS BAR
+        # ==============================
+        y = 440
+        pct = random.uniform(0.3, 0.9)
+        length = int(600 * pct)
 
-        draw.line((x, y, x + length, y), fill=bar_color, width=10)
-        draw.line((x + length, y, x + 580, y), fill="green", width=8)
-        draw.ellipse((x + length - 10, y - 10, x + length + 10, y + 10), fill=bar_color)
+        color = random_color()
+
+        draw.line((x, y, x+600, y), fill=(80,80,80), width=8)
+        draw.line((x, y, x+length, y), fill=color, width=10)
+
+        draw.ellipse((x+length-8, y-8, x+length+8, y+8), fill=color)
 
         # Time
-        draw_text(draw, (x, 400), "00:00", font_small, "white")
-        draw_text(draw, (1080, 400), duration, font_small, "white")
-
-        # Icons
-        try:
-            icons = Image.open("AnonMusic/assets/play_icons.png").convert("RGBA")
-            bg.paste(icons, (x, 450), icons)
-        except:
-            pass
+        draw_text(draw, (x, 470), "00:00", font_small, "white")
+        draw_text(draw, (x+520, 470), duration, font_small, "white")
 
         # ==============================
-        # DOUBLE WATERMARK
+        # WATERMARKS
         # ==============================
 
-        # LEFT
+        # LEFT (Green)
         left_text = "GitHub @kirtiBots"
-        bbox1 = draw.textbbox((0, 0), left_text, font=font_watermark)
-        lw = bbox1[2] - bbox1[0]
-        lh = bbox1[3] - bbox1[1]
+        draw.text((22, 682), left_text, font=font_watermark, fill=(0,0,0,150))  # shadow
+        draw.text((20, 680), left_text, font=font_watermark, fill=(0,255,120))  # green
 
-        lx = 20
-        ly = thumb_size[1] - lh - 20
-
-        draw.text((lx+1, ly+1), left_text, font=font_watermark, fill=(0,0,0,150))
-        draw.text((lx, ly), left_text, font=font_watermark, fill=(255,255,255,180))
-
-        # RIGHT
+        # RIGHT (yellow)
         right_text = "Powered by Kriti-Bots"
-        bbox2 = draw.textbbox((0, 0), right_text, font=font_watermark)
-        rw = bbox2[2] - bbox2[0]
-        rh = bbox2[3] - bbox2[1]
+        bbox = draw.textbbox((0,0), right_text, font=font_watermark)
+        rw = bbox[2]
 
         rx = thumb_size[0] - rw - 20
-        ry = thumb_size[1] - rh - 20
+        ry = 680
 
-        draw.text((rx+1, ry+1), right_text, font=font_watermark, fill=(0,0,0,150))
-        draw.text((rx, ry), right_text, font=font_watermark, fill=(255,255,255,180))
+        draw.text((rx+2, ry+2), right_text, font=font_watermark, fill=(0,0,0,150))  # shadow
+        draw.text((rx, ry), right_text, font=font_watermark, fill=(180,255,0))      # neon
 
-        # Save
+        # ==============================
+        # SAVE
+        # ==============================
         bg.save(path)
-        os.remove(temp_path)
-
         return path
 
     except Exception as e:
