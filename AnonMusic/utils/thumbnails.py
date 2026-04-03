@@ -188,7 +188,3 @@ async def gen_thumb(videoid: str, user_name: str = "Unknown", thumb_size=(1280, 
     except Exception as e:
         print("Thumbnail Error:", e)
         return YOUTUBE_IMG_URL
-
-    finally:
-        if os.path.exists(temp_path):
-            os.remove(temp_path)
