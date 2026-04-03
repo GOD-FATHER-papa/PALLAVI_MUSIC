@@ -130,8 +130,8 @@ async def gen_thumb(videoid: str, thumb_size=(1280, 720)):
         x = 560
         t1, t2 = truncate(title)
 
-        draw_text(draw, (x, 170), t1, font_title, "green")
-        draw_text(draw, (x, 230), t2, font_title, "yellow")
+        draw_text(draw, (x, 170), t1, font_title, "white")
+        draw_text(draw, (x, 230), t2, font_title, "white")
         draw_text(draw, (x, 310), f"{channel} • {views}", font_small, "red")
 
         # Progress Bar
@@ -146,8 +146,8 @@ async def gen_thumb(videoid: str, thumb_size=(1280, 720)):
         draw.ellipse((x + length - 10, y - 10, x + length + 10, y + 10), fill=bar_color)
 
         # Time
-        draw_text(draw, (x, 400), "00:00", font_small, "green")
-        draw_text(draw, (1080, 400), duration, font_small, "yellow")
+        draw_text(draw, (x, 400), "00:00", font_small, "white")
+        draw_text(draw, (1080, 400), duration, font_small, "white")
 
         # Icons
         try:
