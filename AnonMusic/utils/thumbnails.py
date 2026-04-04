@@ -138,7 +138,7 @@ async def gen_thumb(videoid: str, user_name: str = "Unknown", thumb_size=(1280, 
         info_text = (
             f"YouTube | {views}\n"
             f"Duration | {duration}\n"
-            f"Player | @{user_name}"
+            f"Player | @{player_username}"
         )
 
         # shadow
