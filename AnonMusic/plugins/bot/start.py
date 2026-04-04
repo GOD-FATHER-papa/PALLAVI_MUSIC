@@ -33,7 +33,7 @@ EFFECT_IDS = [
     5159385139981059251,
 ]
 
-SHASHANK_IMG = [
+ANON_IMG = [
     "https://files.catbox.moe/s5c7vp.jpg",
     "https://files.catbox.moe/z1x4ba.jpg",
     "https://files.catbox.moe/4lnygg.jpg",
@@ -56,7 +56,7 @@ async def start_pm(client, message: Message, _):
         if name.startswith("help"):
             keyboard = help_pannel(_)
             await message.reply_photo(
-                random.choice(SHASHANK_IMG),
+                random.choice(ANON_IMG),
                  has_spoiler=True,
                 caption=_['help_1'].format(config.SUPPORT_CHAT),
                 reply_markup=keyboard,
@@ -109,7 +109,7 @@ async def start_pm(client, message: Message, _):
         served_users = len(await get_served_users())
         UP, CPU, RAM, DISK = await bot_sys_stats()
         await message.reply_photo(
-            random.choice(SHASHANK_IMG),
+            random.choice(ANON_IMG),
              has_spoiler=True,
             caption=_["start_2"].format(message.from_user.mention, app.mention, UP, DISK, CPU, RAM, served_users, served_chats),
             reply_markup=InlineKeyboardMarkup(out),
@@ -127,7 +127,7 @@ async def start_gp(client, message: Message, _):
     out = start_panel(_)
     uptime = int(time.time() - _boot_)
     await message.reply_photo(
-        random.choice(SHASHANK_IMG),
+        random.choice(ANON_IMG),
          has_spoiler=True,
         caption=_["start_1"].format(app.mention, get_readable_time(uptime)),
         reply_markup=InlineKeyboardMarkup(out),
@@ -166,7 +166,7 @@ async def welcome(client, message: Message):
 
                 out = start_panel(_)
                 await message.reply_photo(
-                    random.choice(SHASHANK_IMG),
+                    random.choice(ANON_IMG),
                      has_spoiler=True,
                     caption=_["start_3"].format(
                         message.from_user.mention,
