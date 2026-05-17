@@ -6,7 +6,7 @@
 
 ---
 
-<img src="https://github.com/Vibe-Bots/AnonMusic/blob/Master/.github/VibeBots.jpg" width="720" height="auto">
+<img src="https://github.com/Vibe-Bots/AnonMusic/blob/Master/.github/VibeBots.jp" width="720" height="auto">
 
 ---
 <a href="https://github.com/Vibe-Bots/AnonMusic/stargazers">
