@@ -56,8 +56,8 @@ class Userbot(Client):
         if config.STRING1:
             await self.one.start()
             try:
-                await self.one.join_chat("VibeBots")
-                await self.one.join_chat("VibeBotsSupport")
+                await self.one.join_chat("Pallavi_Dairy")
+                await self.one.join_chat("RONEY_CHAT_GROUP")
             except:
                 pass
             assistants.append(1)
@@ -77,8 +77,8 @@ class Userbot(Client):
         if config.STRING2:
             await self.two.start()
             try:
-                await self.two.join_chat("VibeBots")
-                await self.two.join_chat("VibeBotsSupport")
+                await self.two.join_chat("Pallavi_Dairy")
+                await self.two.join_chat("RONEY_CHAT_GROUP")
             except:
                 pass
             assistants.append(2)
@@ -98,8 +98,8 @@ class Userbot(Client):
         if config.STRING3:
             await self.three.start()
             try:
-                await self.three.join_chat("VibeBots")
-                await self.three.join_chat("VibeBotsSupport")
+                await self.three.join_chat("Pallavi_Dairy")
+                await self.three.join_chat("RONEY_CHAT_GROUP")
             except:
                 pass
             assistants.append(3)
@@ -119,8 +119,8 @@ class Userbot(Client):
         if config.STRING4:
             await self.four.start()
             try:
-                await self.four.join_chat("VibeBots")
-                await self.four.join_chat("VibeBotsSupport")
+                await self.four.join_chat("Pallavi_Dairy")
+                await self.four.join_chat("RONEY_CHAT_GROUP")
             except:
                 pass
             assistants.append(4)
@@ -140,8 +140,8 @@ class Userbot(Client):
         if config.STRING5:
             await self.five.start()
             try:
-                await self.five.join_chat("VibeBots")
-                await self.five.join_chat("VibeBotsSupport")
+                await self.five.join_chat("Pallavi_Dairy")
+                await self.five.join_chat("RONEY_CHAT_GROUP")
             except:
                 pass
             assistants.append(5)
