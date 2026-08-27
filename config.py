@@ -25,7 +25,7 @@ LOGGER_ID = validate_env_var("LOGGER_ID", cast_type=int)
 OWNER_ID = validate_env_var("OWNER_ID", cast_type=int)
 MONGO_DB_URI = getenv("MONGO_DB_URI")
 
-BASE_API_URL = getenv("BASE_API_URL", "https://api.vibebots.fun")
+BASE_API_URL = getenv("BASE_API_URL", "https://api01.shrutibots.site")
 BASE_API_KEY = getenv("BASE_API_KEY", "ShrutiBotsTUOhRD5u1C8vTXPfFZys")
 
 COOKIES_URL = getenv("COOKIES_URL")
@@ -41,7 +41,7 @@ GIT_TOKEN = getenv("GIT_TOKEN")
 
 
 SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/Bindas_life0")
-SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/RONEY_CHAT_GROUP")
+SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/Tabahi_update_bot")
 
 AUTO_END_VC_STREAM = getenv("AUTO_END_VC_STREAM", "false").lower() in ("true", "1")
 AUTO_LEAVING_ASSISTANT = getenv("AUTO_LEAVING_ASSISTANT", "false").lower() in ("true", "1")
